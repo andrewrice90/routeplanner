@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Reg:</b>
+  <%= @vehicle.reg %>
+</p>
+
+<p>
+  <b>Decription:</b>
+  <%= @vehicle.decription %>
+</p>
+
+<p>
+  <b>Height:</b>
+  <%= @vehicle.height %>
+</p>
+
+<p>
+  <b>Carimage:</b>
+  <%= @vehicle.carimage %>
+  <%= image_tag("auris.jpg", :alt => "Auris", :size => "165x150") %> 
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @vehicle.user.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
+<%= link_to 'Back', vehicles_path %>

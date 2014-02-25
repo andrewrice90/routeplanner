@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  reg: MyString
+  decription: MyString
+  height: 1.5
+  carimage: MyString
+  user_id: MyString
+
+two:
+  reg: MyString
+  decription: MyString
+  height: 1.5
+  carimage: MyString
+  user_id: MyString

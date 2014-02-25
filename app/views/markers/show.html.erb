@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Address:</b>
+  <%= @marker.address %>
+</p>
+
+<p>
+  <b>Height:</b>
+  <%= @marker.height %>
+</p>
+
+<p>
+  <b>Latitude:</b>
+  <%= @marker.latitude %>
+</p>
+
+<p>
+  <b>Longitude:</b>
+  <%= @marker.longitude %>
+</p>
+
+
+<%= link_to 'Edit', edit_marker_path(@marker) %> |
+<%= link_to 'Back', markers_path %>

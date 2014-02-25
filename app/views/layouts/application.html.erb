@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <%= stylesheet_link_tag    "bootstrap", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+<div id="header">
+<div style="color:#58ACFA">
+<h1 align = "center">Route Planner Pro</h1>
+<h4 align = "center">powered by Ruby on Rails</h4>
+</div>
+	<div id="sidebar">  <br >
+<ul>
+	<% if !signed_in? %>
+		<li><%= link_to "Sign In", signin_path %></li>		
+	<% else %>
+		<li>Signed in as <%= @current_user.name %></li>
+		<li><%= link_to "Sign Out", signout_path %></li>
+
+	<%end %>
+	 	 <li><%= link_to "Home", pages_home_path %></li>
+ 		 <li><%= link_to "Contact", pages_contact_path %></li>
+		 <li><%= link_to "Help", pages_help_path %></li>
+
+
+
+	</ul></div>
+</div>
+</head>
+<body id="library"> 
+<div id="container">
+
+
+<div id="content">
+<%= yield -%>
+</div>
+</html>
