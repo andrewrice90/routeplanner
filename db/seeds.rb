@@ -5,3 +5,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+require 'nokogiri'
+
+doc = Nokogiri::XML(File.open("#{Rails.root}/public/bridges.xml"))
+
+marker = doc.xpath("//marker")
+marker.each do |mymarker|
+	address = mymarker.xpath("name").text
+	height = mymarker.xpath("height").text
+	latitude = mymarker.xpath("lat").text
+	longitude = mymarker.xpath("lng").text
+	Marker.create(:address => address, :height => height, :latitude => latitude, :longitude => longitude)
+end
