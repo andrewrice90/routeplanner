@@ -8,7 +8,11 @@ class MarkersController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @markers }
     end
+
   end
+
+  before_filter :authorise, :only => [:new, :create, :destroy, :edit]
+
 
   # GET /markers/1
   # GET /markers/1.json
@@ -80,4 +84,7 @@ class MarkersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+
 end

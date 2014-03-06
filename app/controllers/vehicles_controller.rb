@@ -1,4 +1,6 @@
 class VehiclesController < ApplicationController
+
+  before_filter :authorise, :only => [:new, :create]
   # GET /vehicles
   # GET /vehicles.json
   def index
@@ -41,7 +43,7 @@ class VehiclesController < ApplicationController
   # POST /vehicles.json
   def create
     @vehicle = Vehicle.new(params[:vehicle])
-
+	@vehicle.user_id = @current_user.id
     respond_to do |format|
       if @vehicle.save
         format.html { redirect_to @vehicle, notice: 'Vehicle was successfully created.' }

@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<center><p id="notice"><%= notice %></p>
 
 <p>
   <b>Reg:</b>
@@ -12,13 +12,13 @@
 
 <p>
   <b>Height:</b>
-  <%= @vehicle.height %>
+  <%= @vehicle.height %> Meters
 </p>
 
 <p>
-  <b>Carimage:</b>
-  <%= @vehicle.carimage %>
-  <%= image_tag("auris.jpg", :alt => "Auris", :size => "165x150") %> 
+  <b> </b>  <br />
+        <%= image_tag(@vehicle.carimage, :size=> "350x250") %> <br>
+
 </p>
 
 <p>

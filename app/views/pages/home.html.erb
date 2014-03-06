@@ -1,4 +1,3 @@
- The current time is <%= @variable1 %> 
 
  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
@@ -72,21 +71,24 @@ function computeTotalDistance(result) {
     </script>
  
   <body>
-  <p2> New user? <%= link_to "Sign up now!", new_user_path %></p2>
 
   <div style="color:#58ACFA">
 
-  <H2> <center> Please enter your starting point and destination </H2>
+  <H2>  Please enter your starting point and destination </H2>
   <form id= "routeform">
       <label for="start">Start point:</label><input type="text" id="start" value="Mullingar"> <br>
       <label for="stop">Stop point:</label><input type="text" id="stop" value="Birr, Offaly"> <br>
       <label for="dest">Destination:</label><input type="text" id="dest" value="Tuam">  <br>
-      <p id="p2"><b><span id="total"></span></b></p>
+      <label for="">Vehicle:</label><input type="text" id="vehicle">  <br>
+    
+          <p id="p2"><b><span id="total"></span></b></p>
   </form>
     <button type="submit" onclick= "calcRoute()"> Submit </button> <br> <br>
+    </div>
     <div id="map-canvas" style="float:left;width:100%; height:600px"> <br ></div>
     <div id="directionsPanel" style="float:left;width:55%;height 90%"> </div>
   <div id="textFields" style="float:right;width:20%; height:90%"> </div>
+
  </center>
 
 
@@ -96,6 +98,4 @@ function computeTotalDistance(result) {
 <a class="twitter-timeline" href="https://twitter.com/GardaTraffic" data-widget-id="433673439446962176">Tweets by @GardaTraffic</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> 
 </div>
-
-
 </body>

@@ -1,5 +1,8 @@
-<p id="notice"><%= notice %></p>
+<center><p id="notice"><%= notice %></p>
 
+<p>
+        <%= image_tag("user.jpg", :size=> "350x250") %> <br>
+</p>
 <p>
   <b>Name:</b>
   <%= @user.name %>
@@ -10,6 +13,9 @@
   <%= @user.email %>
 </p>
 
+<b>Vehicles:</b>
+  <%#= @user.vehicle %>
+</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

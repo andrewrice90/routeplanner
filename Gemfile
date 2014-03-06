@@ -17,6 +17,9 @@ group :assets do
   gem 'gmaps4rails'
   gem 'will_paginate', '~> 3.0'
   gem 'carrierwave', '~> 0.9.0'
+  gem 'nokogiri'
+  gem 'geocoder'
+
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
 

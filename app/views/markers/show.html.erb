@@ -1,4 +1,5 @@
-<p id="notice"><%= notice %></p>
+<center><p id="notice"><%= notice %></p>
+
 
 <p>
   <b>Address:</b>
@@ -7,7 +8,7 @@
 
 <p>
   <b>Height:</b>
-  <%= @marker.height %>
+  <%= @marker.height %> meters
 </p>
 
 <p>
@@ -18,6 +19,9 @@
 <p>
   <b>Longitude:</b>
   <%= @marker.longitude %>
+</p>
+<p>
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@marker.latitude}%2C#{@marker.longitude}" %>
 </p>
 
 

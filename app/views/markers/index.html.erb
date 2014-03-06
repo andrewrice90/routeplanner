@@ -1,6 +1,14 @@
-<h1>Listing markers</h1>
+<center><h1>Bridge Locations</h1>
 
-<table>
+<%= form_tag("/search", :method => "get") do %>
+   <%= label_tag(:q, "Search for:") %>
+   <%= text_field_tag(:q, params[:q], :id => 'q_field') %>
+   <%= submit_tag("Search") %>
+<% end %> 
+<br>
+
+<table class="hovertable">
+
   <tr>
     <th>Address</th>
     <th>Height</th>

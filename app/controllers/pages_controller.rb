@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
+
+	before_filter :authorise, :only => :help
   def home
+	
   end
 
   def about
@@ -9,5 +12,6 @@ class PagesController < ApplicationController
   end
 
   def help
+	@vehicles = @current_user.vehicles
   end
 end
