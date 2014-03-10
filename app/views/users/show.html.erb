@@ -1,7 +1,8 @@
 <center><p id="notice"><%= notice %></p>
 
 <p>
-        <%= image_tag("user.jpg", :size=> "350x250") %> <br>
+      <td><img src="<%= @user.profileImage %>"width="250" height="250" align="center"></td>
+
 </p>
 <p>
   <b>Name:</b>
@@ -13,9 +14,35 @@
   <%= @user.email %>
 </p>
 
-<b>Vehicles:</b>
-  <%#= @user.vehicle %>
-</p>
+<table class="hovertable">
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+  <tr>
+    <th>Reg</th>
+    <th>Description</th>
+    <th>Height</th>
+    <th>Image</th>
+    <th></th>
+    <th></th>
+    <th></th>
+   
+  </tr>
+<b>Vehicles:</b>
+ 
+
+<% @user.vehicles.each do |vehicle| %>
+    <tr>
+      <td><%= vehicle.reg%></td>
+      <td><%= vehicle.decription %></td>
+      <td><%= vehicle.height %> m</td> 
+      <td><img src="<%= vehicle.carImageUploader %>"width="45" height="25" align="center"></td>
+       <td><%= link_to 'View', vehicle %></td>
+    <td><%= link_to 'Update', edit_vehicle_path(vehicle) %></td>
+    <td><%= link_to 'Delete', vehicle, confirm: 'Are you sure?', method: :delete %></td>
+      <% end %>
+      </tr>
+
+</p>
+</table> <br />
+
+<%= link_to 'Edit Profile', edit_user_path(@user) %> |
+<%= link_to 'Home', pages_home_path %>

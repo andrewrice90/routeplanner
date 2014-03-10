@@ -9,6 +9,7 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
 <% @vehicles.each do |vehicle| %>
@@ -17,10 +18,10 @@
     <td><%= vehicle.decription %></td>
     <td><%= vehicle.height  %> Meters</td>
     <td><%= vehicle.user.name %></td>
-
-   <td><%= link_to 'Show', vehicle %></td>
-    <td><%= link_to 'Edit', edit_vehicle_path(vehicle) %></td>
-    <td><%= link_to 'Destroy', vehicle, confirm: 'Are you sure?', method: :delete %></td>
+    <td><img src="<%= vehicle.carImageUploader %>"width="25" height="20"></td>
+   <td><%= link_to 'View', vehicle %></td>
+    <td><%= link_to 'Update', edit_vehicle_path(vehicle) %></td>
+    <td><%= link_to 'Delete', vehicle, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

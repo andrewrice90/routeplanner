@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   # GET /users.json
 
 
+def index
+  @vehicles = @current_user.vehicles
+end
+
   def index
     @users = User.all
 

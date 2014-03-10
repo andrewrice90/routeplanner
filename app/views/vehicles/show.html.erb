@@ -17,10 +17,9 @@
 
 <p>
   <b> </b>  <br />
-        <%= image_tag(@vehicle.carimage, :size=> "350x250") %> <br>
 
+<img src="<%= @vehicle.carImageUploader %>"width="350" height="250">
 </p>
-
 <p>
   <b>User:</b>
   <%= @vehicle.user.name %>

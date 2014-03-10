@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 	has_many :vehicles
+	mount_uploader :profileImage, ImageUploader
 	has_secure_password
 	validates :password_confirmation, presence: true
 

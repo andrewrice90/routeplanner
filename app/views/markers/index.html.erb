@@ -25,9 +25,9 @@
     <td><%= marker.height %></td>
     <td><%= marker.latitude %></td>
     <td><%= marker.longitude %></td>
-    <td><%= link_to 'Show', marker %></td>
-    <td><%= link_to 'Edit', edit_marker_path(marker) %></td>
-    <td><%= link_to 'Destroy', marker, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'View', marker %></td>
+    <td><%= link_to 'Update', edit_marker_path(marker) %></td>
+    <td><%= link_to 'Delete', marker, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

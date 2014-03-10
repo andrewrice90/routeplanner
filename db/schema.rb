@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140225170938) do
+ActiveRecord::Schema.define(:version => 20140310164859) do
 
   create_table "markers", :force => true do |t|
     t.string   "address"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20140225170938) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "password_digest"
+    t.string   "profileImage"
   end
 
   create_table "vehicles", :force => true do |t|
@@ -36,8 +37,9 @@ ActiveRecord::Schema.define(:version => 20140225170938) do
     t.float    "height"
     t.string   "carimage"
     t.string   "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "carImageUploader"
   end
 
 end
