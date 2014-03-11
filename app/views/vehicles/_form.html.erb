@@ -23,6 +23,21 @@
     <%= f.label :height %><br />
     <%= f.text_field :height %>
   </div>
+
+  <div class="field">
+    <%= f.label "Trailer" %><br />
+    <%= check_box_tag :truck %>
+  </div>
+  <% if check_box_tag :truck =>true %>
+    <div class="field">
+    <%= f.label "Trailer Height" %><br />
+    <%= f.text_field :trailer %>
+   <% else %>
+           <%= f.label "Trailer Height" %><br />
+               <%= f.text_field "None" %>
+
+    </div>
+   <% end %>
   
      <div class="field">
       Car image uploader:

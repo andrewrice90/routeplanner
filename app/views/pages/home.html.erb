@@ -1,4 +1,3 @@
-
  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
 <center>
@@ -80,6 +79,15 @@ function computeTotalDistance(result) {
       <label for="stop">Stop point:</label><input type="text" id="stop" value="Birr, Offaly"> <br>
       <label for="dest">Destination:</label><input type="text" id="dest" value="Tuam">  <br>
       <label for="">Vehicle:</label><input type="text" id="vehicle">  <br>
+      <script><%= collection_select(:user_id, 0, User.all, :id, :name) %> </script>
+
+      <select>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+      </select>
+      </form>
+      </div>
     
           <p id="p2"><b><span id="total"></span></b></p>
   </form>

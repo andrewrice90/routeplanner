@@ -19,12 +19,12 @@
   <tr>
     <th>Reg</th>
     <th>Description</th>
+        <th></th>
     <th>Height</th>
-    <th>Image</th>
     <th></th>
     <th></th>
     <th></th>
-   
+
   </tr>
 <b>Vehicles:</b>
  
@@ -33,13 +33,15 @@
     <tr>
       <td><%= vehicle.reg%></td>
       <td><%= vehicle.decription %></td>
+      <td><img src="<%= vehicle.carImageUploader %>"width="75" height="45" align="center"></td>
       <td><%= vehicle.height %> m</td> 
-      <td><img src="<%= vehicle.carImageUploader %>"width="45" height="25" align="center"></td>
        <td><%= link_to 'View', vehicle %></td>
-    <td><%= link_to 'Update', edit_vehicle_path(vehicle) %></td>
-    <td><%= link_to 'Delete', vehicle, confirm: 'Are you sure?', method: :delete %></td>
+       <td><%= link_to 'Update', edit_vehicle_path(vehicle) %></td>
+       <td><%= link_to 'Delete', vehicle, confirm: 'Are you sure?', method: :delete %></td>
       <% end %>
       </tr>
+      <%= link_to ' Add Vehicle', new_vehicle_path %> 
+
 
 </p>
 </table> <br />
