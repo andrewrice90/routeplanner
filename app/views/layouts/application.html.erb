@@ -5,13 +5,11 @@
     <% if !signed_in? %>
 			<% else %>
 		<div align = "right">Signed in as <%= @current_user.name %> <br>
-				<img src="<%= @current_user.profileImage %>"width="85" height="85" align = "right"</td>
-
-	<%end %></div>
+		<img src="<%= @current_user.profileImage %>"width="85" height="85" align = "right"</td></div>
+	<%end %>
     <link rel="icon" type="image/ico" href="assets/images/favicon.ico">
 
-  
-  <%= stylesheet_link_tag    "bootstrap", :media => "all" %>
+   <%= stylesheet_link_tag    "bootstrap", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <div style="color:#58ACFA">
@@ -24,13 +22,18 @@
 		 <% if !signed_in? %>
 	 	 <li><%= link_to "Sign In", signin_path %></li>
 	 	 <% else %>
-	 	 	 	 <li><%= link_to "Sign Out", signout_path %></li>
+	 	 	 	 		 <li><%= link_to "Profile", user_path(@current_user) %></li>
+
 	 	 	 	 	<%end %>
 
 	 	 <li><%= link_to "Home", pages_home_path %></li>
  		 <li><%= link_to "Contact", pages_contact_path %></li>
 		 <li><%= link_to "Help", pages_help_path %></li>
-		 <li><%= link_to "Profile", user_path(@current_user) %></li>
+		  <% if !signed_in? %>
+			<% else %>
+	 	 	 	 <li><%= link_to "Sign Out", signout_path %></li>
+		 	<%end %>
+
  		 <li><%= link_to "Bridge Locations", markers_path %></li>
 
 		 
