@@ -11,6 +11,7 @@
 
   <tr>
     <th>Address</th>
+    <th>County</th>
     <th>Height</th>
     <th>Latitude</th>
     <th>Longitude</th>
@@ -22,6 +23,7 @@
 <% @markers.each do |marker| %>
   <tr>
     <td><%= marker.address %></td>
+    <td><%= marker.county %></td>
     <td><%= marker.height %></td>
     <td><%= marker.latitude %></td>
     <td><%= marker.longitude %></td>

@@ -12,7 +12,15 @@ html {
 	  
 }
 
-
+#map-canvas {
+	overflow: hidden;
+	width: 1200px;
+	height:600px;
+	margin: 10px auto;
+	padding: 10px;
+	background: #F2F2F2;
+	box-shadow: px 0px 10px 5px rgba(0,0,0,.2);
+}
 * {
   margin: 0;
   padding: 4;

@@ -19,6 +19,7 @@ group :assets do
   gem 'carrierwave'
   gem 'nokogiri'
   gem 'geocoder'
+  gem "geokit", "~> 1.8.4"
   
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
