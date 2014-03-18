@@ -12,10 +12,25 @@ html {
 	  
 }
 
+.pretty th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.pretty th .asc {
+  background-image: url(/images/up-arrow.gif);
+}
+
+.pretty th .desc {
+  background-image: url(/images/down.jpg);
+}
+
+
 #map-canvas {
 	overflow: hidden;
-	width: 1200px;
-	height:600px;
+	width: 770px;
+	height:880px;
 	margin: 10px auto;
 	padding: 10px;
 	background: #F2F2F2;

@@ -1,8 +1,11 @@
 class MarkersController < ApplicationController
   # GET /markers
   # GET /markers.json
+
+  helper_method :sort_column, :sort_direction
+
   def index
-    @markers = Marker.all
+    @markers = Marker.order(sort_column + " " + sort_direction)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,6 +13,10 @@ class MarkersController < ApplicationController
     end
 
   end
+def search
+  @markers = Marker.search params[:q]
+  render 'index'
+end
 
   before_filter :authorise, :only => [:new, :create, :destroy, :edit]
 
@@ -85,6 +92,13 @@ class MarkersController < ApplicationController
     end
   end
 
-
+private
+def sort_column
+    Marker.column_names.include?(params[:sort]) ? params[:sort] : "height"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 
 end

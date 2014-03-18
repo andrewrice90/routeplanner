@@ -1,8 +1,13 @@
- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-
 <center>
+  <% if !signed_in? %>
+  Please sign in to plan your journey
+      <% else %>
+  <%end %>
 
 
+
+
+ <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script>
 var rendererOptions = {
   draggable: true
@@ -11,13 +16,13 @@ var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);;
 var directionsService = new google.maps.DirectionsService();
 var map;
 
-var middleMap = new google.maps.LatLng(53.424878,-7.940766);
+var middleMap = new google.maps.LatLng(53.227755, -7.878802);
 
 
 function initialize() {
 
   var mapOptions = {
-    zoom: 7,
+    zoom: 8,
     center: middleMap
   };
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -97,36 +102,16 @@ function computeTotalDistance(result) {
  
   <body>
 
-  <div style="color:#58ACFA">
-
-  <H2>  Please enter your starting point and destination </H2>
-  <form id= "routeform">
-      <label for="start">Start point:</label><input type="text" id="start" value="53.714493, -7.741307"> <br>
-      <label for="stop">Stop point:</label><input type="text" id="stop" value="Birr, Offaly"> <br>
-      <label for="dest">Destination:</label><input type="text" id="dest" value="Mallow, Cork">  <br>
-      <label for="">Vehicle:</label><input type="text" id="vehicle">  <br>
-      <select>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </select>
-      </form>
-      </div>
-    
-          <p id="p2"><b><span id="total"></span></b></p>
-  </form>
-    <button type="submit" onclick= "calcRoute()"> Submit </button> <br> <br>
-    </div>
     <div id="map-canvas" style="float:center"> <br ></div>
-    <div id="directionsPanel" style="float:left;width:55%;height 90%"> </div>
-  <div id="textFields" style="float:right;width:20%; height:90%"> </div>
 
  </center>
 
 
- <div style="float:right;width:45%; height:50%">
+ <div style="float:left;width:45%; height:50%; margin:2%">
   <a class="twitter-timeline" href="https://twitter.com/aaroadwatch" data-widget-id="433665295937327104" style="float:left;">Tweets by @aaroadwatch</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+ <div style="float:right;width:45%; height:50%; margin:2%">
 <a class="twitter-timeline" href="https://twitter.com/GardaTraffic" data-widget-id="433673439446962176">Tweets by @GardaTraffic</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> 
 </div>

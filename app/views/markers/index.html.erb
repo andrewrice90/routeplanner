@@ -1,18 +1,17 @@
 <center><h1>Bridge Locations</h1>
 
-<%= form_tag("/search", :method => "get") do %>
-   <%= label_tag(:q, "Search for:") %>
-   <%= text_field_tag(:q, params[:q], :id => 'q_field') %>
-   <%= submit_tag("Search") %>
-<% end %> 
-<br>
+<div id="search">
+  <%= render :partial => 'markers/search' %>
 
+</div>
+<br>
+<div>
 <table class="hovertable">
 
   <tr>
-    <th>Address</th>
-    <th>County</th>
-    <th>Height</th>
+    <th><%= sortable "address" %></th>
+    <th><%= sortable "county" %></th>
+    <th><%= sortable "height" %></th>
     <th>Latitude</th>
     <th>Longitude</th>
     <th></th>
@@ -34,6 +33,6 @@
 <% end %>
 </table>
 
-<br />
-
+<br> 
+</div>
 <%= link_to 'New Marker', new_marker_path %>

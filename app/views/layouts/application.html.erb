@@ -32,6 +32,8 @@
 		  <% if !signed_in? %>
 			<% else %>
 	 	 	 	 <li><%= link_to "Sign Out", signout_path %></li>
+	 	 	 	 <li><%= link_to "Plan your Journey", about_path %></li>
+
 		 	<%end %>
 
  		 <li><%= link_to "Bridge Locations", markers_path %></li>

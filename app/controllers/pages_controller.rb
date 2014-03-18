@@ -6,6 +6,8 @@ class PagesController < ApplicationController
   end
 
   def about
+    @markers = Marker.all
+  #@vehicles = current_user.vehicles
   end
 
   def contact

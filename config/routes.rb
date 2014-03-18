@@ -23,8 +23,9 @@ Routeplanner::Application.routes.draw do
   
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
+  match '/about', :to => 'pages#about'
 
-  # match '/search',  :to =>  'markers#search'
+  match '/search',  :to =>  'markers#search'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
