@@ -4,9 +4,6 @@
       <% else %>
   <%end %>
 
-
-
-
  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script>
 var rendererOptions = {
@@ -18,30 +15,74 @@ var map;
 
 var middleMap = new google.maps.LatLng(53.227755, -7.878802);
 
-
 function initialize() {
-
   var mapOptions = {
     zoom: 8,
-    center: middleMap
+    center: middleMap,
+    scrollwheel: false
   };
-  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   <% @markers.each do |m| %>                  
-    var bridge = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);
-    var marker = new google.maps.Marker({position:bridge});
-    marker.setMap(map);
+      var bridge = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);
+      //var address = <%= m.address %>;
+      var infoWindow = new google.maps.InfoWindow({ content: contentString2, maxWidth: 500});
+      var marker = new google.maps.Marker({position:bridge});
+     google.maps.event.addListener(marker, 'click', function() {
+      infoWindow.open(map, marker);
+     });
+      marker.setMap(map);
+
+      var contentString = '<div style="width:250px; height:190px;" class="info-window">' +
+      '<h5>Bridge Details</h5>' +
+      '<table border="0" cellpadding="0" cellspacing="0" class="contact">' +
+      '<tr>' +
+      '<th scope="row">Address:</th>' +
+      '</tr>' +
+      '<th scope="row">County:</th>' +
+      '<td>' + <%= m.latitude %>+ '</td>' +
+      '</tr>' +
+      '<th scope="row">Height:</th>' +
+      '<td>' + <%= m.height %>+ '</td>' +
+      '</tr>' +
+      
+      '<th scope="row">Latitude:</th>' +
+      '<td>' + <%= m.latitude %> + '<br />' +
+      '</tr>' +
+      '<th scope="row">Longitude:</th>' +
+      '<td>' + <%= m.longitude %> +
+      '</tr>' +
+      '</table>' +
+      '</div>';
+
+
+var contentString2 = '<div class="info-window">' +
+        '<h5>Bridge Details</h5>' +
+        '<table border="0" cellpadding="0" cellspacing="0" class="contact">' +
+        '<tr>' +
+        '<th scope="row">Address:</th>' +
+      '</tr>' +
+      '<th scope="row">County:</th>' +
+      '<td>' + <%= m.latitude %>+ '</td>' +
+      '</tr>' +
+      '<th scope="row">Height:</th>' +
+      '<td>' + <%= m.height %>+ '</td>' +
+      '</tr>' +
+      
+      '<th scope="row">Latitude:</th>' +
+      '<td>' + <%= m.latitude %> + '<br />' +
+      '</tr>' +
+      '<th scope="row">Longitude:</th>' +
+      '<td>' + <%= m.longitude %> +
+      '</tr>' +
+      '</table>' +
+      '</div>'
+
+   
+     
  
   <% end %>
-   <% @markers.each do |m| %>   
-   //var windowcontent = <%= m.address %>;
-   var infoWindow = new google.maps.InfoWindow();
-   var html='<strong>' + "dd" +'</strong.>'+ " Height:" + "dd" +"m";
-   google.maps.event.addListener(marker, 'click', function() {
-        infoWindow.setContent(html);
-        infoWindow.open(map, marker);
-      });
 
-      <% end %>
 
   directionsDisplay.setMap(map);
   directionsDisplay.setPanel(document.getElementById('directionsPanel'));
@@ -65,6 +106,7 @@ function calcRoute() {
     destination: endPoint,
   //if(stopPoint !=null) {
     waypoints:[{location: stopPoint}],
+    
   //}
   //else {
   //  alert("Please add stop off point!");
@@ -96,13 +138,13 @@ function computeTotalDistance(result) {
   
 	
 	
-  google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'load', initialize);
 
-    </script>
+</script>
  
-  <body>
+ <body>
 
-    <div id="map-canvas" style="float:center"> <br ></div>
+ <div id="map-canvas" style="float:center"> <br ></div>
 
  </center>
 

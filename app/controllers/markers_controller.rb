@@ -94,7 +94,7 @@ end
 
 private
 def sort_column
-    Marker.column_names.include?(params[:sort]) ? params[:sort] : "height"
+    Marker.column_names.include?(params[:sort]) ? params[:sort] : "county"
   end
   
   def sort_direction

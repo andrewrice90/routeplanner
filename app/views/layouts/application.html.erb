@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/assets/favicon.ico" />
     <title>Route Planner Pro</title>
     <% if !signed_in? %>
 			<% else %>
 		<div align = "right">Signed in as <%= @current_user.name %> <br>
 		<img src="<%= @current_user.profileImage %>"width="85" height="85" align = "right"</td></div>
 	<%end %>
-    <link rel="icon" type="image/ico" href="assets/images/favicon.ico">
 
    <%= stylesheet_link_tag    "bootstrap", :media => "all" %>
   <%= javascript_include_tag "application" %>
