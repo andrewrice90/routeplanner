@@ -44,6 +44,29 @@ function initialize() {
   directionsDisplay.setMap(map);
   directionsDisplay.setPanel(document.getElementById('directionsPanel'));
 
+var rboxer = new RouteBoxer();
+var distance = 2; // km
+var myMarker = new google.maps.LatLng(53.424878,-7.940766);
+
+directionService.route(request, function(result, status) {
+  if (status == google.maps.DirectionsStatus.OK) {
+  
+    // Box the overview path of the first route
+    var path = result.routes[0].overview_path;
+    var boxes = routeBoxer.box(path, distance);
+    
+    for (var i = 0; i < boxes.length; i++) {
+      var bounds = box[i];
+      // if bounds.contains(LatLng:myMarker) == true {
+      //   alert("hi");
+      // }
+      // else {
+      //   alert("error");
+      // }
+
+    }
+  }
+});
   google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
     computeTotalDistance(directionsDisplay.getDirections());
   });
@@ -103,12 +126,12 @@ function computeTotalDistance(result) {
   <div style="color:#58ACFA">
 
   <H2>  Please enter your starting point and destination </H2>
-  <form id= "routeform">
+  <form id= "routeform"> <b>
       <label for="start">Start point:</label><input type="text" id="start" value="53.714493, -7.741307"> <br>
       <label for="stop">Stop point:</label><input type="text" id="stop" value="Birr, Offaly"> <br>
       <label for="dest">Destination:</label><input type="text" id="dest" value="Mallow, Cork">  <br>
       <label for="">Vehicle:</label><input type="text" id="vehicle">  <br>
-  </form>
+  </b></form>
   </div>
     
           <p id="p2"><b><span id="total"></span></b></p>

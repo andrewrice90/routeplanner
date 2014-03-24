@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href='http://fonts.googleapis.com/css?family=Seymour+One' rel='stylesheet' type='text/css'>
+
+	<div id="mydiv"; align= "center">
+	<%= stylesheet_link_tag    "bootstrap", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
 <link rel="shortcut icon" href="/assets/favicon.ico" />
     <title>Route Planner Pro</title>
     <% if !signed_in? %>
 			<% else %>
-		<div align = "right">Signed in as <%= @current_user.name %> <br>
-		<img src="<%= @current_user.profileImage %>"width="85" height="85" align = "right"</td></div>
+		<div id= "mydiv" align = "right">Signed in as <%= @current_user.name %> <br>
+		<img src="<%= @current_user.profileImage %>"width="85" height="85"align = "right"</td></div>
 	<%end %>
 
-   <%= stylesheet_link_tag    "bootstrap", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-  <div style="color:#58ACFA">
-
-<div id="header"; align= "center">
 <h1>Route Planner Pro</h1>
 <h4>helping you get to your destination safely</h4>
-<div>
+</head>
+</div>
+
+<body>
+ <div id= "mydiv2">
 	<ul>
 		 <% if !signed_in? %>
 	 	 <li><%= link_to "Sign In", signin_path %></li>
@@ -37,16 +41,9 @@
 		 	<%end %>
 
  		 <li><%= link_to "Bridge Locations", markers_path %></li>
-
-		 
-
-
-
 	</ul>
 </div>
-
-</div>
-</head>
+</body>
 <div id="content">
 <%= yield -%>
 </div>
@@ -57,4 +54,6 @@
 	 	 <% else %>
 <%end %>
 </div>
+
+
 </html>
