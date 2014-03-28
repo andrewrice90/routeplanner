@@ -21,7 +21,7 @@
 
 <% @markers.each do |marker| %>
   <tr>
-    <td><%= marker.address %></td>
+    <td><a href= <%= edit_marker_path(marker) %>> <%= marker.address %></td>
     <td><%= marker.county %></td>
     <td><%= marker.height %></td>
     <td><%= marker.latitude %></td>
@@ -35,4 +35,4 @@
 
 <br> 
 </div>
-<%= link_to 'New Marker', new_marker_path %>
+<%= link_to 'Add New Bridge', new_marker_path %>

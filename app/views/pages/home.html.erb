@@ -3,14 +3,11 @@
   Please sign in to plan your journey
       <% else %>
   <%end %>
-
  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script>
 var rendererOptions = {
   draggable: true
 };
-var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);;
-var directionsService = new google.maps.DirectionsService();
 var map;
 
 var middleMap = new google.maps.LatLng(53.227755, -7.878802);
@@ -22,30 +19,32 @@ function initialize() {
     scrollwheel: false
   };
 
+
 map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   <% @markers.each do |m| %>                  
       var bridge = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);
-      //var address = <%= m.address %>;
-      var infoWindow = new google.maps.InfoWindow({ content: contentString2, maxWidth: 500});
-      var marker = new google.maps.Marker({position:bridge});
-     google.maps.event.addListener(marker, 'click', function() {
-      infoWindow.open(map, marker);
-     });
+      var myHeight = <%= m.height %>;
+      var marker = new google.maps.Marker({position:bridge });
       marker.setMap(map);
 
-      var contentString = '<div style="width:250px; height:190px;" class="info-window">' +
-      '<h5>Bridge Details</h5>' +
-      '<table border="0" cellpadding="0" cellspacing="0" class="contact">' +
-      '<tr>' +
-      '<th scope="row">Address:</th>' +
+
+ if (myHeight == "0") {
+        var bridgeType =  '<th scope="row">Width:</th>  <td> <b><i> Narrow</i> </b></td>'
+    } else {
+     bridgeType =  '<th scope="row">Height:</th>  <td id= "mytd">' + myHeight +' m </td>'
+         }
+
+
+var contentString = '<div class="infowin">' +
+        '<h5 id="h5style">Bridge Details</h5>' +
+        '<table class = "infotable" width="190" border="0" cellpadding="0" cellspacing="3">' +
+        '<tr>' +
+         '<th scope="row">Address:</th>' +
+      '<td>' + "ERROR" + '</td>' +
       '</tr>' +
       '<th scope="row">County:</th>' +
-      '<td>' + <%= m.latitude %>+ '</td>' +
-      '</tr>' +
-      '<th scope="row">Height:</th>' +
-      '<td>' + <%= m.height %>+ '</td>' +
-      '</tr>' +
-      
+      '<td>' + "ERROR" + '</td>' +
+      '</tr>' + bridgeType +'</tr>' +
       '<th scope="row">Latitude:</th>' +
       '<td>' + <%= m.latitude %> + '<br />' +
       '</tr>' +
@@ -54,90 +53,18 @@ map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
       '</tr>' +
       '</table>' +
       '</div>';
-
-
-var contentString2 = '<div class="info-window">' +
-        '<h5>Bridge Details</h5>' +
-        '<table border="0" cellpadding="0" cellspacing="0" class="contact">' +
-        '<tr>' +
-        '<th scope="row">Address:</th>' +
-      '</tr>' +
-      '<th scope="row">County:</th>' +
-      '<td>' + <%= m.latitude %>+ '</td>' +
-      '</tr>' +
-      '<th scope="row">Height:</th>' +
-      '<td>' + <%= m.height %>+ '</td>' +
-      '</tr>' +
-      
-      '<th scope="row">Latitude:</th>' +
-      '<td>' + <%= m.latitude %> + '<br />' +
-      '</tr>' +
-      '<th scope="row">Longitude:</th>' +
-      '<td>' + <%= m.longitude %> +
-      '</tr>' +
-      '</table>' +
-      '</div>'
-
-   
-     
+var infoWindow =  new google.maps.InfoWindow;
+bindInfoW(marker, contentString, infoWindow);
  
   <% end %>
-
-
-  directionsDisplay.setMap(map);
-  directionsDisplay.setPanel(document.getElementById('directionsPanel'));
-
-  google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
-    computeTotalDistance(directionsDisplay.getDirections());
+function bindInfoW(marker, contentString, infoWindow) {
+  google.maps.event.addListener(marker, 'click', function() {
+    infoWindow.setContent(contentString);
+    infoWindow.open(map, marker);
   });
-
+ }
 }
 
-
-function calcRoute() {
-
-  var startPoint = document.getElementById("start").value
-  var endPoint = document.getElementById("dest").value
-  var stopPoint = document.getElementById("stop").value
-  
-  
-  var request = {
-    origin: startPoint,
-    destination: endPoint,
-  //if(stopPoint !=null) {
-    waypoints:[{location: stopPoint}],
-    
-  //}
-  //else {
-  //  alert("Please add stop off point!");
-  //  }
-  travelMode: google.maps.TravelMode.DRIVING
-  };
-  directionsService.route(request, function(response, status) {
-    if (status == google.maps.DirectionsStatus.OK) {
-      directionsDisplay.setDirections(response);
-    }
-  });
-}
-
-var bridge1 = new google.maps.LatLng(53.712105	-7.743023);
-	var bMarker = new google.maps.Marker({
-		position:bridge1,
-	});
-	bMarker.setMap(map);
-	
-function computeTotalDistance(result) {
-  var total = 0;
-  var myroute = result.routes[0];
-  for (var i = 0; i < myroute.legs.length; i++) {
-    total += myroute.legs[i].distance.value;
-  }
-  total = total / 1000.0;
-  document.getElementById('total').innerHTML = "Total Distance: " + total + ' km';
-}
-  
-	
-	
 google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>

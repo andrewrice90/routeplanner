@@ -10,28 +10,30 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+<table class="hovertable2">
+  <td><div class="field" align= "center">
     <%= f.label :address %><br />
-    <%= f.text_field :address %>
+    <%= f.text_area :address, :size=> "45" %>
   </div>
-  <div class="field">
+  <div class="field" align= "center">
     <%= f.label :county %><br />
-    <%= f.text_field :county %>
+    <%= f.text_field :county, :size=> "10" %>
   </div>
-  <div class="field">
-    <%= f.label :height %><br />
-    <%= f.text_field :height %>
+  <div class="field" align= "center">
+    <%= f.label "Height(m)" %><br />
+    <%= f.text_field :height, :size=> "10"  %>
   </div>
-  <div class="field">
+  <div class="field" align= "center">
     <%= f.label :latitude %><br />
-    <%= f.text_field :latitude %>
+    <%= f.text_field :latitude , :size=> "10" %>
   </div>
-  <div class="field">
+  <div class="field" align= "center">
     <%= f.label :longitude %><br />
-    <%= f.text_field :longitude %>
+    <%= f.text_field :longitude, :size=> "10"  %>
   </div>
-  <div class="actions">
+  <div class="actions" align= "center">
     <%= f.submit %>
-  </div>
+  </div> </td>
+  </table>
+
 <% end %>

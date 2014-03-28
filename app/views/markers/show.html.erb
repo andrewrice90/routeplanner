@@ -1,31 +1,30 @@
 <center><p id="notice"><%= notice %></p>
 
-
-<p>
-  <b>Address:</b>
-  <%= @marker.address %>
-</p>
-<b>County:</b>
-  <%= @marker.county %>
-</p>
-<p>
-  <b>Height:</b>
-  <%= @marker.height %> meters
-</p>
-
-<p>
-  <b>Latitude:</b>
-  <%= @marker.latitude %>
-</p>
-
-<p>
-  <b>Longitude:</b>
-  <%= @marker.longitude %>
-</p>
 <p>
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@marker.latitude}%2C#{@marker.longitude}" %>
 </p>
+<table class="hovertable2">
+<tr>
+
+  <tr>
+    <th><%= "Address" %></th>
+    <th><%= "County" %></th>
+    <th><%= "Height" %></th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+  
+  </tr>
+  <tr>
+    <td><%= @marker.address %></td>
+    <td><%= @marker.county %></td>
+    <td><%= @marker.height %></td>
+    <td><%= @marker.latitude %></td>
+    <td><%= @marker.longitude %></td>
+
+</tr>
+</table>
+<br />
 
 
-<%= link_to 'Edit', edit_marker_path(@marker) %> |
-<%= link_to 'Back', markers_path %>
+<%= link_to 'Edit Bridge Details', edit_marker_path(@marker) %> |
+<%= link_to 'Return to Bridge Locations', markers_path %>

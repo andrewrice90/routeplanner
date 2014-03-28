@@ -12,7 +12,7 @@
     <% if !signed_in? %>
 			<% else %>
 		<div id= "mydiv" align = "right">Signed in as <%= @current_user.name %> <br>
-		<img src="<%= @current_user.profileImage %>"width="85" height="85"align = "right"</td></div>
+		 <img src="<%= @current_user.profileImage%> "width="85" height="85"align = "right" </td></div>
 	<%end %>
 
 <h1>Route Planner Pro</h1>
@@ -31,7 +31,6 @@
 	 	 	 	 	<%end %>
 
 	 	 <li><%= link_to "Home", pages_home_path %></li>
- 		 <li><%= link_to "Contact", pages_contact_path %></li>
 		 <li><%= link_to "Help", pages_help_path %></li>
 		  <% if !signed_in? %>
 			<% else %>

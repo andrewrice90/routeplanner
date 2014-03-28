@@ -26,47 +26,54 @@ function initialize() {
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   <% @markers.each do |m| %>                  
     var bridge = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);
+    var myHeight = <%= m.height %>;
     var marker = new google.maps.Marker({position:bridge});
     marker.setMap(map);
  
+
+
+ if (myHeight == "0") {
+        var bridgeType =  '<th scope="row">Width:</th>  <td> <b><i> Narrow</i> </b></td>'
+    } else {
+     bridgeType =  '<th scope="row">Height:</th>  <td id= "mytd">' + myHeight +' m </td>'
+         }
+
+
+var contentString = '<div class="infowin">' +
+        '<h5 id="h5style">Bridge Details</h5>' +
+        '<table class = "infotable" width="190" border="0" cellpadding="0" cellspacing="3">' +
+        '<tr>' +
+         '<th scope="row">Address:</th>' +
+      '<td>' + "ERROR" + '</td>' +
+      '</tr>' +
+      '<th scope="row">County:</th>' +
+      '<td>' + "ERROR" + '</td>' +
+      '</tr>' + bridgeType +'</tr>' +
+      '<th scope="row">Latitude:</th>' +
+      '<td>' + <%= m.latitude %> + '<br />' +
+      '</tr>' +
+      '<th scope="row">Longitude:</th>' +
+      '<td>' + <%= m.longitude %> +
+      '</tr>' +
+      '</table>' +
+      '</div>';
+var infoWindow =  new google.maps.InfoWindow;
+bindInfoW(marker, contentString, infoWindow);
+ 
   <% end %>
-   <% @markers.each do |m| %>   
-   //var windowcontent = <%= m.address %>;
-   var infoWindow = new google.maps.InfoWindow();
-   var html='<strong>' + "dd" +'</strong.>'+ " Height:" + "dd" +"m";
-   google.maps.event.addListener(marker, 'click', function() {
-        infoWindow.setContent(html);
-        infoWindow.open(map, marker);
-      });
 
-      <% end %>
 
+
+function bindInfoW(marker, contentString, infoWindow) {
+  google.maps.event.addListener(marker, 'click', function() {
+    infoWindow.setContent(contentString);
+    infoWindow.open(map, marker);
+  });
+ }
   directionsDisplay.setMap(map);
   directionsDisplay.setPanel(document.getElementById('directionsPanel'));
 
-var rboxer = new RouteBoxer();
-var distance = 2; // km
-var myMarker = new google.maps.LatLng(53.424878,-7.940766);
 
-directionService.route(request, function(result, status) {
-  if (status == google.maps.DirectionsStatus.OK) {
-  
-    // Box the overview path of the first route
-    var path = result.routes[0].overview_path;
-    var boxes = routeBoxer.box(path, distance);
-    
-    for (var i = 0; i < boxes.length; i++) {
-      var bounds = box[i];
-      // if bounds.contains(LatLng:myMarker) == true {
-      //   alert("hi");
-      // }
-      // else {
-      //   alert("error");
-      // }
-
-    }
-  }
-});
   google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
     computeTotalDistance(directionsDisplay.getDirections());
   });
@@ -99,25 +106,35 @@ function calcRoute() {
   });
 }
 
-var bridge1 = new google.maps.LatLng(53.712105	-7.743023);
-	var bMarker = new google.maps.Marker({
-		position:bridge1,
-	});
-	bMarker.setMap(map);
+  var bridge2 = new google.maps.LatLng(52.5, -8.1);
+  var marker2 = new google.maps.Marker({position:bridge2});
 	
 function computeTotalDistance(result) {
   var total = 0;
   var myroute = result.routes[0];
   for (var i = 0; i < myroute.legs.length; i++) {
     total += myroute.legs[i].distance.value;
+
+    var stlat = myroute.legs[i].start_location.lat().toFixed(3);
+    var stlng = myroute.legs[i].start_location.lng().toFixed(3);
+    var endlat = myroute.legs[i].end_location.lat().toFixed(3);
+    var endlng = myroute.legs[i].end_location.lng().toFixed(3);
+    document.getElementById('stlat').innerHTML = "Start Lat: " + stlat;
+    document.getElementById('stlng').innerHTML = "Start Lng: " + stlng;  
+    document.getElementById('endlat').innerHTML = "End Lat: " + endlat;
+    document.getElementById('endlng').innerHTML = "End Lng: " + endlng;  
+    if(bridge2.lat() < stlat && bridge2.lat() > endlat && bridge2.lng() < stlng && bridge2.lng() > endlng) {
+      document.getElementById('aaa').innerHTML = "Success! Lat:" + bridge2.lat() + " Lng:" + bridge2.lng();
+    } else {
+      document.getElementById('aaa').innerHTML = "Fail! Lat:" + bridge2.lat() + " Lng:" + bridge2.lng();
+    }
+
   }
   total = total / 1000.0;
   document.getElementById('total').innerHTML = "Total Distance: " + total + ' km';
 }
   
-	
-	
-  google.maps.event.addDomListener(window, 'load', initialize);
+	  google.maps.event.addDomListener(window, 'load', initialize);
 
     </script>
  
@@ -135,6 +152,12 @@ function computeTotalDistance(result) {
   </div>
     
           <p id="p2"><b><span id="total"></span></b></p>
+          <p id="stlat"></p>
+          <p id="stlng"></p>
+           <p id="endlat"></p>
+          <p id="endlng"></p>
+           <p id="aaa"> a</p>
+
   </form>
     <button type="submit" onclick= "calcRoute()"> Submit </button> <br> <br>
     </div>

@@ -25,10 +25,13 @@ font-family: 'Seymour One', sans-serif;
   background-position: right center;
 }
 
+.hovertable tr:hover td{
+  background-color:#ffffff;
+}
 
 #map-canvas {
 	overflow: hidden;
-	width: 770px;
+	width: 870px;
 	height:880px;
 	margin: 10px auto;
 	padding: 10px;
@@ -45,33 +48,40 @@ nav {
 }
  
 
- 
-<!-- CSS goes in the document HEAD or added to your external stylesheet -->
+table.infotable{
+  border-width: 3px;
+  padding: 8px;
+  border-style: solid;
+}
+table.infotable td, table.infotable th  {
+  background-color:#81F781;
+}
 
-table.hovertable {
+table.hovertable, table.hovertable2 {
   font-family: verdana,arial,sans-serif;
   font-size:11px;
   color:#333333;
-  border-width: 1px;
+  border-width: 3px;
   border-color: #999999;
   border-collapse: collapse;
 }
-table.hovertable th {
+table.hovertable th, table.hovertable2 th {
   background-color:#c3dde0;
-  border-width: 1px;
+  border-width: 3px;
   padding: 8px;
   border-style: solid;
   border-color: #a9c6c9;
 }
-table.hovertable tr {
+table.hovertable tr, table.hovertable2 tr {
   background-color:#d4e3e5;
 }
-table.hovertable td {
-  border-width: 1px;
+table.hovertable td, table.hovertable2 td{
+  border-width: 3px;
   padding: 8px;
   border-style: solid;
   border-color: #a9c6c9;
 }
+
 
 #mydiv2 {
   background-color:#151515;
@@ -136,7 +146,13 @@ body {
   background-color: #F2F2F2;
 }
 
-
+#h5style {
+  font-family: 'Seymour One', sans-serif;
+  font-size: 12pt;
+  color: #0A2A1B;
+  padding-top: 3px;
+  padding-bottom: 0px;
+}
 a {
   background: transparent;
 }
@@ -208,13 +224,10 @@ p2{
   margin: 1;
   font: sans-serif;
   background-color: #CEECF5;
-
 }
 button {
-  overflow: visible;
-  
+  overflow: visible;  
 }
-
 div {
 	padding: 5px;
 }
@@ -441,6 +454,7 @@ hr {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
 h1,
 h2,
 h3,
@@ -451,7 +465,7 @@ h6,
 .h2,
 .h3,
 .h4,
-.h5,
+
 .h6 {
   font-family: inherit;
   font-weight: 500;
