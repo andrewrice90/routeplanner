@@ -1,4 +1,8 @@
-== Welcome to Rails
+This Final year project application is designed to assist HGV(Heavy Goods Vehicle)
+drivers to avoid possible collisons with low bridges through the Republic of Ireland.
+
+
+== Welcome to Railsout 
 
 Rails is a web-application framework that includes everything needed to create
 database-backed web applications according to the Model-View-Control pattern.
