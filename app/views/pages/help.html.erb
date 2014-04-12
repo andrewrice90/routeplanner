@@ -10,6 +10,224 @@
 <p>The map below shows a map containing every bridge location in the Republic of Ireland</p>
 <%= image_tag("bridge1.png", :size => "350x450") %>
    
- 
+
+
+<center>
+<h1>Plan you journey</h1>
+
+ <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/routeboxer/src/RouteBoxer.js" type="text/javascript"></script>
+
+
+<script>
+var rendererOptions = {
+  draggable: true
+};
+var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);;
+var directionsService = new google.maps.DirectionsService();
+var map;
+//routeboxer
+var boxpolys = null;
+var routeBoxer = null;
+var distance = 1;
+
+var middleMap = new google.maps.LatLng(53.424878,-7.940766);
+
+
+function initialize() {
+
+  var mapOptions = {
+    zoom: 7,
+    center: middleMap,
+    scrollwheel: false
+  };
+
+
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  
+  //map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+       routeBoxer = new RouteBoxer();
 
   
+  directionsDisplay.setMap(map);
+  directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+
+
+  google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
+    computeTotalDistance(directionsDisplay.getDirections());
+  });
+
+}
+
+
+function calcRoute() {
+  <% @markers.each do |m| %>                  
+    var bridge = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);
+    var myHeight = <%= m.height %>;
+    var markerz = new google.maps.Marker({position:bridge});
+    markerz.setMap(map);
+
+ 
+  <% end %>
+//routeboxer
+ clearBoxes();
+
+  var startPoint = document.getElementById("start").value
+  var endPoint = document.getElementById("dest").value
+  var stopPoint = document.getElementById("stop").value
+  
+
+  var request = {
+    origin: startPoint,
+    destination: endPoint,
+    waypoints:[{location: stopPoint}],
+  travelMode: google.maps.TravelMode.DRIVING
+  };
+
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+      //routeboxer
+       var path = response.routes[0].overview_path;
+       var boxes = routeBoxer.box(path, distance);
+          drawBoxes(boxes);
+      document.getElementById('points').innerHTML = "<b>Points along this route:  (" + path.length + " total</b>)"; //+ path;
+      document.getElementById('boxes').innerHTML = "<b>Boxes along this route:  (" + boxes.length + " total</b>)"; + boxes;
+
+
+var myLatlng = new google.maps.LatLng(53.607495, -7.098758);
+   var marker1 = new google.maps.Marker({position: myLatlng, map:map});
+
+for (var i = 0; i < boxes.length; i++) {
+
+
+ var northeast = boxes[i].getNorthEast();
+ var southwest = boxes[i].getSouthWest();
+ var lat_north = northeast.lat();
+ var long_east = northeast.lng();
+ var lat_south = southwest.lat();
+ var long_west = southwest.lng();
+
+var latlng1 =  new google.maps.LatLng(lat_south, long_west);
+var latlng2 = new google.maps.LatLng(lat_south, long_east);
+var latlng3 = new google.maps.LatLng(lat_north, long_east);
+var latlng4 = new google.maps.LatLng(lat_north, long_west);
+
+
+var myBox = [latlng1, latlng2, latlng3, latlng4];
+
+   // var marker = new google.maps.Marker({position: latlng1, map:map});
+   // var marker = new google.maps.Marker({position: latlng2, map:map});
+   // var marker = new google.maps.Marker({position: latlng3, map:map});
+   // var marker = new google.maps.Marker({position: latlng4, map:map});
+
+var bounds = new google.maps.LatLngBounds(southwest, northeast);
+
+var withinBox = new google.maps.Polygon({
+    paths: myBox
+  });
+
+if(google.maps.geometry.poly.containsLocation(myLatlng, withinBox)){
+  var infowindow = new google.maps.InfoWindow({content: "There is a bridge along your route!"});
+      infowindow.open(map, marker1);
+    }
+    else {
+      console.log("error");
+    }
+}
+});
+//console.log(myLatlng);
+//var center = new google.maps.LatLng(southwest, northeast);
+//if (myLatlng.lat() <= northeast.lat() && myLatlng.lng() >= northeast.lng() && myLatlng.lat() >= southwest.lat() && myLatlng.lng() >= southwest.lng()){
+      //document.getElementById('points').innerHTML = "<b>SUCCESS!!: " + myLatlng + "</b>";
+  //   alert("SUCCESS" + northeast + " " + southwest);
+    //    var infowindow = new google.maps.InfoWindow({content: "There is a bridge along your route!"});
+      //  infowindow.open(map, marker1);
+
+    //} else {
+      //document.getElementById('points').innerHTML = "<b>FAIL: " + myLatlng + "</b>";
+      //alert("FAIL");
+
+   // }
+
+//alert(bounds);
+
+  //routeboxer
+  function drawBoxes(boxes) {
+      boxpolys = new Array(boxes.length);
+      for (var i = 0; i < boxes.length; i++) {
+        boxpolys[i] = new google.maps.Rectangle({
+          bounds: boxes[i],
+          fillOpacity: 0,
+          strokeOpacity: 1.0,
+          strokeColor: '#000000',
+          strokeWeight: 1,
+          map: map
+        });
+      }
+    }
+
+  //routeboxer    
+  function clearBoxes() {
+      if (boxpolys != null) {
+        for (var i = 0; i < boxpolys.length; i++) {
+          boxpolys[i].setMap(null);
+        }
+      }
+      boxpolys = null;
+    }
+}
+
+	
+function computeTotalDistance(result) {
+  var total = 0;
+  var myroute = result.routes[0];
+  for (var i = 0; i < myroute.legs.length; i++) {
+    total += myroute.legs[i].distance.value;
+
+    
+  }
+  total = total / 1000.0;
+  document.getElementById('total').innerHTML = "Total Distance: " + total + ' km';
+
+}
+  
+	  google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+ 
+  <body>
+
+
+  <div style="color:#58ACFA">
+
+  <H2>  Please enter your starting point and destination </H2>
+  <form id= "routeform"> <b>
+      <label for="start">Start point:</label><input type="text" id="start" value="Mullingar"> <br>
+      <label for="stop">Stop point:</label><input type="text" id="stop" value="Delvin"> <br>
+      <label for="dest">Destination:</label><input type="text" id="dest" value="Athboy">  <br>
+  </b></form>
+  </div>
+  <p id="p2"><b><span id="total"></span></b></p>
+
+  <br /> <p id="points"></p>
+
+  <br /> <p id="boxes"></p>
+  <br /> <p id="boxes2"></p>
+
+
+
+
+  </form>
+    <button type="submit" onclick= "calcRoute()"> Submit </button> <br> <br>
+    </div>
+    <div id="map-canvas" style="float:center"> <br ></div>
+    <div id="directionsPanel" style="float:left;width:55%;height 90%"> </div>
+  <div id="textFields" style="float:right;width:20%; height:90%"> </div>
+<div>
+
+
+ </center>
+
+</body>

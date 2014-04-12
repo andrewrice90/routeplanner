@@ -11,9 +11,11 @@ class PagesController < ApplicationController
   end
 
   def contact
+    @markers = Marker.all
   end
 
   def help
+   @markers = Marker.all
 	@vehicles = @current_user.vehicles
   end
 end
