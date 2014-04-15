@@ -7,6 +7,7 @@ Routeplanner::Application.routes.draw do
 
   get "sessions/destroy"
 
+
   resources :markers
 
   resources :users
@@ -24,6 +25,10 @@ Routeplanner::Application.routes.draw do
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
   match '/about', :to => 'pages#about'
+
+  match '/signin',  :to => 'sessions#newAdmin'
+  match '/signout', :to => 'sessions#destroyAdmin'
+  
 
   match '/search',  :to =>  'markers#search'
 
