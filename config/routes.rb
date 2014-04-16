@@ -1,4 +1,6 @@
 Routeplanner::Application.routes.draw do
+  resources :admins
+
   resources :vehicles
 
   get "sessions/new"
@@ -15,6 +17,7 @@ Routeplanner::Application.routes.draw do
 
 
   get "pages/home"
+  get "pages/adminHome"
 
   get "pages/about"
 
@@ -26,8 +29,9 @@ Routeplanner::Application.routes.draw do
   match '/signout', :to => 'sessions#destroy'
   match '/about', :to => 'pages#about'
 
-  match '/signin',  :to => 'sessions#newAdmin'
-  match '/signout', :to => 'sessions#destroyAdmin'
+  match '/adminsignin',  :to => 'sessions#newAdmin'
+  match '/adminsignout', :to => 'sessions#destroyAdmin'
+  match '/admincreate',  :to => 'sessions#createAdmin'
   
 
   match '/search',  :to =>  'markers#search'

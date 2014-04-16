@@ -15,10 +15,8 @@
 <center>
 <h1>Plan you journey</h1>
 
- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/routeboxer/src/RouteBoxer.js" type="text/javascript"></script>
-
-
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/routeboxer/src/RouteBoxer.js" type="text/javascript"></script>
 <script>
 var rendererOptions = {
   draggable: true
@@ -30,28 +28,19 @@ var map;
 var boxpolys = null;
 var routeBoxer = null;
 var distance = 1;
-
 var middleMap = new google.maps.LatLng(53.424878,-7.940766);
 
-
 function initialize() {
-
   var mapOptions = {
     zoom: 7,
     center: middleMap,
     scrollwheel: false
   };
 
-
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  
-  //map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-       routeBoxer = new RouteBoxer();
-
-  
+  routeBoxer = new RouteBoxer();
   directionsDisplay.setMap(map);
   directionsDisplay.setPanel(document.getElementById('directionsPanel'));
-
 
   google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
     computeTotalDistance(directionsDisplay.getDirections());
@@ -95,9 +84,13 @@ function calcRoute() {
       document.getElementById('points').innerHTML = "<b>Points along this route:  (" + path.length + " total</b>)"; //+ path;
       document.getElementById('boxes').innerHTML = "<b>Boxes along this route:  (" + boxes.length + " total</b>)"; + boxes;
 
+  var vehicleHeight = document.getElementById("vehicle").value
+  var intVehicle = parseInt(vehicleHeight)
 
-var myLatlng = new google.maps.LatLng(53.607495, -7.098758);
-   var marker1 = new google.maps.Marker({position: myLatlng, map:map});
+<% @markers.each do |m| %> 
+  var bridge1 = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);  
+  var marker1 = new google.maps.Marker({position: bridge1, map:map});
+  var height = <%= m.height %>
 
 for (var i = 0; i < boxes.length; i++) {
 
@@ -122,36 +115,46 @@ var myBox = [latlng1, latlng2, latlng3, latlng4];
    // var marker = new google.maps.Marker({position: latlng3, map:map});
    // var marker = new google.maps.Marker({position: latlng4, map:map});
 
+
+
+var contentString = '<div class="infowin">' +
+        '<h5 id="h5style">LOW BRIDGE</h5>' +
+        '<table class = "infotable" width="190" border="0" cellpadding="0" cellspacing="3">' +
+        '<tr>' +
+         '<th scope="row">Height:</th>' +
+      '<td>' + height + 'm </td>' +
+      '</tr>'  +
+      '<th scope="row">Latitude:</th>' +
+      '<td>' + <%= m.latitude %> + '<br />' +
+      '</tr>' +
+      '<th scope="row">Longitude:</th>' +
+      '<td>' + <%= m.longitude %> +
+      '</tr>' +
+      '</table>' +
+      '</div>';
+
+
 var bounds = new google.maps.LatLngBounds(southwest, northeast);
 
 var withinBox = new google.maps.Polygon({
     paths: myBox
   });
 
-if(google.maps.geometry.poly.containsLocation(myLatlng, withinBox)){
-  var infowindow = new google.maps.InfoWindow({content: "There is a bridge along your route!"});
-      infowindow.open(map, marker1);
-    }
-    else {
-      console.log("error");
-    }
+if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
+  console.log("Bridge on route");
+      if(height > 0){
+        if (intVehicle > height) {
+          var infowindow = new google.maps.InfoWindow({content: contentString});
+          infowindow.open(map, marker1);
+        }
+      }
 }
+else {
+  console.log("OK");
+}
+}
+<% end %>
 });
-//console.log(myLatlng);
-//var center = new google.maps.LatLng(southwest, northeast);
-//if (myLatlng.lat() <= northeast.lat() && myLatlng.lng() >= northeast.lng() && myLatlng.lat() >= southwest.lat() && myLatlng.lng() >= southwest.lng()){
-      //document.getElementById('points').innerHTML = "<b>SUCCESS!!: " + myLatlng + "</b>";
-  //   alert("SUCCESS" + northeast + " " + southwest);
-    //    var infowindow = new google.maps.InfoWindow({content: "There is a bridge along your route!"});
-      //  infowindow.open(map, marker1);
-
-    //} else {
-      //document.getElementById('points').innerHTML = "<b>FAIL: " + myLatlng + "</b>";
-      //alert("FAIL");
-
-   // }
-
-//alert(bounds);
 
   //routeboxer
   function drawBoxes(boxes) {
@@ -179,7 +182,7 @@ if(google.maps.geometry.poly.containsLocation(myLatlng, withinBox)){
     }
 }
 
-	
+  
 function computeTotalDistance(result) {
   var total = 0;
   var myroute = result.routes[0];
@@ -193,7 +196,7 @@ function computeTotalDistance(result) {
 
 }
   
-	  google.maps.event.addDomListener(window, 'load', initialize);
+    google.maps.event.addDomListener(window, 'load', initialize);
 
     </script>
  
@@ -207,6 +210,8 @@ function computeTotalDistance(result) {
       <label for="start">Start point:</label><input type="text" id="start" value="Mullingar"> <br>
       <label for="stop">Stop point:</label><input type="text" id="stop" value="Delvin"> <br>
       <label for="dest">Destination:</label><input type="text" id="dest" value="Athboy">  <br>
+      <label for="">Vehicle Height:</label><input type="text" id="vehicle" value="2">  <br>
+
   </b></form>
   </div>
   <p id="p2"><b><span id="total"></span></b></p>

@@ -1,26 +1,29 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
+<%= form_for(@admin) do |f| %>
+  <% if @admin.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(@admin.errors.count, "error") %> prohibited this admin from being saved:</h2>
 
       <ul>
-      <% @user.errors.full_messages.each do |msg| %>
+      <% @admin.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-<p class="text-warning"> Enter your details below:</p>
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name %><br /><br />
+    <%= f.text_field :name %>
   </div>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.text_field :email %><br /><br />
+    <%= f.text_field :email %>
   </div>
   <div class="field">
+    <%= f.label :position %><br />
+    <%= f.select :position, ["Administrator"] %>
+  </div>
+   <div class="field">
     <%= f.label :password %><br />
     <%= f.password_field :password %><br /><br />
   </div>
@@ -28,12 +31,7 @@
    <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %><br />
   </div>
-   <div class="field">
-      profile picture uploader:
-       <%= f.file_field :profileImage %>
-  </div>
   <div class="actions">
     <%= f.submit %>
-	</button>
   </div>
 <% end %>

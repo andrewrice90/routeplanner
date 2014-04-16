@@ -6,16 +6,17 @@ class PagesController < ApplicationController
   end
 
   def about
-    @markers = Marker.all
-  #@vehicles = current_user.vehicles
+  @markers = Marker.all
+  #@vehicle = current_user.vehicles
   end
 
   def contact
-    @markers = Marker.all
+   @markers = Marker.all
+   #@vehicle = @current_user.vehicles.first
   end
 
   def help
    @markers = Marker.all
-	@vehicles = @current_user.vehicles
+   @vehicle = @current_user.vehicles.first
   end
 end
