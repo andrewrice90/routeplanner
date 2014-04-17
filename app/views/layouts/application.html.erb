@@ -8,6 +8,12 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 <link rel="shortcut icon" href="/assets/favicon.ico" />
+ <% if !adminsigned_in? %>
+<%= link_to "Admin Log In", adminsignin_path %>
+      <% else %>
+<%= link_to " Out", adminsignout_path %>
+Signed in as <%= @current_admin.name %> 
+<% end %>
     <title>Route Planner Pro</title>
     <% if !signed_in? %>
 			<% else %>
@@ -19,15 +25,13 @@
 <h4>helping you get to your destination safely</h4>
 </head>
 </div>
- <% if !adminsigned_in? %>
 <body>
  <div id= "mydiv2">
 	<ul>
 		 <% if !signed_in? %>
 	 	 <li><%= link_to "Sign In", signin_path %></li>
 	 	 <% else %>
-	 	 	 	 		 <li><%= link_to "Profile", user_path(@current_user) %></li>
-
+	 	 	 <li><%= link_to "Profile", user_path(@current_user) %></li>
 	 	 	 	 	<%end %>
 
 	 	 <li><%= link_to "Home", pages_home_path %></li>
@@ -36,7 +40,6 @@
 			<% else %>
 	 	 	 	 <li><%= link_to "Sign Out", signout_path %></li>
 	 	 	 	 <li><%= link_to "Plan your Journey", about_path %></li>
-
 		 	<%end %>
 
  		 <li><%= link_to "Bridge Locations", markers_path %></li>
@@ -45,22 +48,22 @@
 </body>
  <% else %>
  <ul>
-
+ 	 <% if !adminsigned_in? %>
+	 	 <li><%= link_to "Home", pages_home_path %></li>
+		 
+			<% else %>
+			<%if !adminsigned_in? %>
 	 	 <li><%= link_to "Home", pages_home_path %></li>
 		 <li><%= link_to "Help", pages_help_path %></li>
  		 <li><%= link_to "Test Page", pages_contact_path %></li>
 		 <li><%= link_to "Plan your Journey", pages_help_path %></li>
-
-		  <% if !adminsigned_in? %>
-			<% else %>
-	 	 	 	 <li><%= link_to "Sign Out", adminsignout_path %></li>
-	 	 	 	 <li><%= link_to "About", about_path %></li>
+ 	 	 <li><%= link_to "Sign Out", adminsignout_path %></li>
+ 	 	 <li><%= link_to "About", about_path %></li>
+ 		 <li><%= link_to "Bridge Locations", markers_path %></li>
 
 		 	<%end %>
-
- 		 <li><%= link_to "Bridge Locations", markers_path %></li>
+ 		 <% end %>
 	</ul>
-<%end %>
 
 <div id="content">
 <%= yield -%>

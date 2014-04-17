@@ -1,28 +1,18 @@
 Routeplanner::Application.routes.draw do
   resources :admins
-
   resources :vehicles
-
-  get "sessions/new"
-
-  get "sessions/create"
-
-  get "sessions/destroy"
-
-
   resources :markers
-
   resources :users
   resources :sessions
 
+  get "sessions/new"
+  get "sessions/create"
+  get "sessions/destroy"
 
   get "pages/home"
   get "pages/adminHome"
-
   get "pages/about"
-
   get "pages/contact"
-
   get "pages/help"
   
   match '/signin',  :to => 'sessions#new'
@@ -33,7 +23,6 @@ Routeplanner::Application.routes.draw do
   match '/adminsignout', :to => 'sessions#destroyAdmin'
   match '/admincreate',  :to => 'sessions#createAdmin'
   
-
   match '/search',  :to =>  'markers#search'
 
   # The priority is based upon order of creation:

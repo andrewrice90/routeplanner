@@ -43,9 +43,9 @@ def destroyAdmin
   if adminsigned_in?
     session[:admin_id] = nil     
     else
-    flash[:notice] = "You have logged out"      
+    flash[:notice] = "You need to sign in first"      
     end
-  redirect_to signin_path
+  redirect_to adminsignin_path
  end
 
 
@@ -54,5 +54,6 @@ def destroyAdmin
   end
 
 end
+
 end
 

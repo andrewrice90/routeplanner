@@ -65,7 +65,6 @@ function bindInfoW(marker, contentString, infoWindow) {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-
 </script>
  
  <body id="content2">
@@ -76,11 +75,20 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 </body>
 <center>
-<% if !adminsigned_in? %>
+
+  <% if !signed_in? %>
+  <% if !adminsigned_in? %>
 <%= link_to "Admin Log In", adminsignin_path %>
       <% else %>
 <%= link_to "Admin Log Out", adminsignout_path %>
 <% end %>
+<% else %>
+
+  User must be logged out before admin can log in
+     <% end %>
+   
+  
+    
 </center>
  <div  style="float:left;width:45%; height:50%; margin:2%">
   <a class="twitter-timeline" href="https://twitter.com/aaroadwatch" data-widget-id="433665295937327104" style="float:left;">Tweets by @aaroadwatch</a>
