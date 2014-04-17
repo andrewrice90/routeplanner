@@ -19,7 +19,7 @@
 <h4>helping you get to your destination safely</h4>
 </head>
 </div>
-
+ <% if !adminsigned_in? %>
 <body>
  <div id= "mydiv2">
 	<ul>
@@ -43,16 +43,26 @@
 	</ul>
 </div>
 </body>
+ <% else %>
+ <ul>
+
+	 	 <li><%= link_to "Home", pages_home_path %></li>
+		 <li><%= link_to "Help", pages_help_path %></li>
+ 		 <li><%= link_to "Test Page", pages_contact_path %></li>
+		 <li><%= link_to "Plan your Journey", pages_help_path %></li>
+
+		  <% if !adminsigned_in? %>
+			<% else %>
+	 	 	 	 <li><%= link_to "Sign Out", adminsignout_path %></li>
+	 	 	 	 <li><%= link_to "About", about_path %></li>
+
+		 	<%end %>
+
+ 		 <li><%= link_to "Bridge Locations", markers_path %></li>
+	</ul>
+<%end %>
+
 <div id="content">
 <%= yield -%>
 </div>
-
-<div align= "center">
-<% if !signed_in? %>
- <li> <h3>New user? <%= link_to "Sign up now!", new_user_path %> </h3> </li>
-	 	 <% else %>
-<%end %>
-</div>
-
-
 </html>

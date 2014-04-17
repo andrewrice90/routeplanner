@@ -1,15 +1,7 @@
-<h1>Help </h1>
-<br>
-
  <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Route Planner Pro</title>
-
-
-<p>The map below shows a map containing every bridge location in the Republic of Ireland</p>
-<%= image_tag("bridge1.png", :size => "350x450") %>
-   
+   <center> <title>Route Planner Pro</title>
 
 
 <center>
@@ -27,8 +19,9 @@ var map;
 //routeboxer
 var boxpolys = null;
 var routeBoxer = null;
-var distance = 1;
+var distance = .05;
 var middleMap = new google.maps.LatLng(53.424878,-7.940766);
+
 
 function initialize() {
   var mapOptions = {
@@ -50,6 +43,9 @@ function initialize() {
 
 
 function calcRoute() {
+
+    var count = 0;
+    var dangercount = 0;
   <% @markers.each do |m| %>                  
     var bridge = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);
     var myHeight = <%= m.height %>;
@@ -59,7 +55,7 @@ function calcRoute() {
  
   <% end %>
 //routeboxer
- clearBoxes();
+ //clearBoxes();
 
   var startPoint = document.getElementById("start").value
   var endPoint = document.getElementById("dest").value
@@ -70,7 +66,8 @@ function calcRoute() {
     origin: startPoint,
     destination: endPoint,
     waypoints:[{location: stopPoint}],
-  travelMode: google.maps.TravelMode.DRIVING
+    provideRouteAlternatives: true,
+    travelMode: google.maps.TravelMode.DRIVING
   };
 
   directionsService.route(request, function(response, status) {
@@ -80,7 +77,7 @@ function calcRoute() {
       //routeboxer
        var path = response.routes[0].overview_path;
        var boxes = routeBoxer.box(path, distance);
-          drawBoxes(boxes);
+       //drawBoxes(boxes);
       document.getElementById('points').innerHTML = "<b>Points along this route:  (" + path.length + " total</b>)"; //+ path;
       document.getElementById('boxes').innerHTML = "<b>Boxes along this route:  (" + boxes.length + " total</b>)"; + boxes;
 
@@ -133,7 +130,6 @@ var contentString = '<div class="infowin">' +
       '</table>' +
       '</div>';
 
-
 var bounds = new google.maps.LatLngBounds(southwest, northeast);
 
 var withinBox = new google.maps.Polygon({
@@ -141,16 +137,20 @@ var withinBox = new google.maps.Polygon({
   });
 
 if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
-  console.log("Bridge on route");
+  console.log("Bridge on route. Height: " + height + " meters");
+    count ++;
+      document.getElementById('bridgeroute').innerHTML = "Number of bridges on your route: " + count;
       if(height > 0){
         if (intVehicle > height) {
+          dangercount ++;
           var infowindow = new google.maps.InfoWindow({content: contentString});
-          infowindow.open(map, marker1);
+          infowindow.open(map, marker1);  
+            document.getElementById('bridgeroute2').innerHTML = "Number of bridges blocking your route: " + dangercount;
+
         }
       }
 }
 else {
-  console.log("OK");
 }
 }
 <% end %>
@@ -188,29 +188,22 @@ function computeTotalDistance(result) {
   var myroute = result.routes[0];
   for (var i = 0; i < myroute.legs.length; i++) {
     total += myroute.legs[i].distance.value;
-
-    
   }
   total = total / 1000.0;
   document.getElementById('total').innerHTML = "Total Distance: " + total + ' km';
-
 }
-  
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-    </script>
- 
-  <body>
-
+  google.maps.event.addDomListener(window, 'load', initialize);
+   </script>
+   <body>
 
   <div style="color:#58ACFA">
 
   <H2>  Please enter your starting point and destination </H2>
   <form id= "routeform"> <b>
-      <label for="start">Start point:</label><input type="text" id="start" value="Mullingar"> <br>
-      <label for="stop">Stop point:</label><input type="text" id="stop" value="Delvin"> <br>
+      <label for="start">Start point:</label><input type="text" id="start" value="Newbrook road, Mullingar"> <br>
+      <label for="stop">Stop point:</label><input type="text" id="stop" value="Harbour Street, Mullingar"> <br>
       <label for="dest">Destination:</label><input type="text" id="dest" value="Athboy">  <br>
-      <label for="">Vehicle Height:</label><input type="text" id="vehicle" value="2">  <br>
+      <label for="">Vehicle Height:</label><input type="text" id="vehicle" value="4">  <br>
 
   </b></form>
   </div>
@@ -219,10 +212,9 @@ function computeTotalDistance(result) {
   <br /> <p id="points"></p>
 
   <br /> <p id="boxes"></p>
-  <br /> <p id="boxes2"></p>
 
-
-
+  <br /> <p id="bridgeroute"><br /></p>
+    <h5 id="h5style"><br /><p id="bridgeroute2"></p></h5> 
 
   </form>
     <button type="submit" onclick= "calcRoute()"> Submit </button> <br> <br>

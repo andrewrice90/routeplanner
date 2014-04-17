@@ -1,7 +1,7 @@
 <center>
   <% if !signed_in? %>
-  Please sign in to plan your journey
-      <% else %>
+  Please sign in to plan your journey or <%= link_to "Sign up now!", new_user_path %> </li>
+  <% else %>
   <%end %>
  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script>
