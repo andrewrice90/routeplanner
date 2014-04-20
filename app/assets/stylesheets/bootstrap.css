@@ -1,14 +1,14 @@
 html {
+  background-image: url(jch.jpg);
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-	  
+      -ms-text-size-adjust: 100%;	  
 }
 #container {  
     width:960px;  
     height:132px;  
     margin:0 auto;  
-    background:transparent url(images/containerbg.png);  
+    background:transparent url(jch.jpg);  
 } 
 #menuwrap {  
     width:100%;  
@@ -33,11 +33,25 @@ ul#menu li a {
     background-image: url(jch.jpg);
 }
 
-#mydiv {
-    background-image: url(jch.jpg);
-font-family: 'Seymour One', sans-serif;
+#mydiv { //header and body
+   margin: 0 auto;
+  background-image: url(jch.jpg);
+  background-color:#D8D8D8;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
+#mydiv2 {
+  margin: 0 auto;
+  background-image: url(jch.jpg);
+  background-color:#D8D8D8;
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+}
+li a:hover {
+  color: #FFFFFF;
+}
 
 .pretty th .current {
   padding-right: 12px;
@@ -49,22 +63,18 @@ font-family: 'Seymour One', sans-serif;
   background-color:#ffffff;
 }
 
-#map-canvas {
+#map-canvas, #directionsPanel {
 	overflow: hidden;
 	width: 870px;
 	height:880px;
 	margin: 10px auto;
 	padding: 10px;
-	box-shadow: px 0px 10px 5px rgba(0,0,0,.2);
 }
 * {
   margin: 0;
   padding: 4;
 }
- 
-nav {
-  margin: 50px;
-}
+
  
 
 table.infotable{
@@ -104,6 +114,7 @@ table.hovertable td, table.hovertable2 td{
 
 
 ul {
+  margin: auto;
   overflow: auto;
   list-style-type: none;
 }
@@ -116,6 +127,7 @@ li {
 }
  
 li a {
+  text-align: center;
   text-decoration: none;
   text-transform: uppercase;
  
@@ -123,26 +135,17 @@ li a {
 ul a {
 
 margin: 1px;
-background-repeat: no-repeat;
-padding: 3px;
-padding-right: 60px;
-padding-left: 30px;
+padding: 1px;
+padding-right: 30px;
+padding-left: 70px;
 display: block;
-line-height: 15px;
+line-height: 20px;
 font-size: 15px;
 }
  
-li a:hover {
-  color: #FFFFFF;
-}
- 
-li.active a {
-  font-weight: bold;
-  color: #FFFFFF;
-}
-
 #routeform label{
-  display: inline-block; width: 190px; text-align: right; 
+  display: inline-block; width: 190px; 
+  text-align: center; 
 }
 
 #p2 span{
@@ -155,13 +158,24 @@ body {
   line-height: 1.428571429;
   color: #0B0707;
 }
+#h1style {
+  font-size: 30pt;
+  color: #8A0808;
+  padding-top: 3px;
+  padding-bottom: 0px;
+}
 
+#h3style {
+  font-size: 16pt;
+  padding-top: 3px;
+  padding-bottom: 0px;
+}
 #h5style {
-  font-family: 'Seymour One', sans-serif;
   font-size: 12pt;
   color: #FF0000;
   padding-top: 3px;
   padding-bottom: 0px;
+  text-align: "center";
 }
 a {
   background: transparent;

@@ -115,7 +115,7 @@ var myBox = [latlng1, latlng2, latlng3, latlng4];
 
 
 var contentString = '<div class="infowin">' +
-        '<h5 id="h5style">LOW BRIDGE</h5>' +
+        '<h5 id="h5style"><center>LOW BRIDGE</h5>' +
         '<table class = "infotable" width="190" border="0" cellpadding="0" cellspacing="3">' +
         '<tr>' +
          '<th scope="row">Height:</th>' +
@@ -196,7 +196,6 @@ function computeTotalDistance(result) {
    </script>
    <body>
 
-  <div style="color:#58ACFA">
 
   <H2>  Please enter your starting point and destination </H2>
   <form id= "routeform"> <b>
@@ -208,23 +207,19 @@ function computeTotalDistance(result) {
   </b></form>
   </div>
   <p id="p2"><b><span id="total"></span></b></p>
+  <br />
+      <button type="submit" onclick= "calcRoute()"> Submit </button> <br> <br>
 
   <br /> <p id="points"></p>
-
   <br /> <p id="boxes"></p>
-
   <br /> <p id="bridgeroute"><br /></p>
     <h5 id="h5style"><br /><p id="bridgeroute2"></p></h5> 
-
-  </form>
-    <button type="submit" onclick= "calcRoute()"> Submit </button> <br> <br>
     </div>
+    <div id="mydiv">
     <div id="map-canvas" style="float:center"> <br ></div>
     <div id="directionsPanel" style="float:left;width:55%;height 90%"> </div>
   <div id="textFields" style="float:right;width:20%; height:90%"> </div>
-<div>
-
-
+</div>
  </center>
 
 </body>

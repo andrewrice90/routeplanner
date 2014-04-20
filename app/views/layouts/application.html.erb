@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href='http://fonts.googleapis.com/css?family=Seymour+One' rel='stylesheet' type='text/css'>
 
 	<div id="mydiv"; align= "center">
 	<%= stylesheet_link_tag    "bootstrap", :media => "all" %>
@@ -10,8 +9,7 @@
 <link rel="shortcut icon" href="/assets/favicon.ico" />
  <% if !adminsigned_in? %>
       <% else %>
-<%= link_to " Out", adminsignout_path %>
-Signed in as <%= @current_admin.name %> 
+Signed in as Admin <b><%= @current_admin.name %></b> <%= link_to "(Sign Out)", adminsignout_path %>
 <% end %>
 <% if !signed_in? %>
 			<% else %>
@@ -20,51 +18,48 @@ Signed in as <%= @current_admin.name %>
 	<%end %>
     <title>Route Planner Pro</title>
     
-
-<h1>Route Planner Pro</h1>
-<h4>helping you get to your destination safely</h4>
-
+<div>
+<h1 id="h1style"><i>Route Planner Pro</i></h1> 
+<h3 id="h3style"><i>Helping you get to your destination safely</i></h3>
 </head>
 </div>
 <body>
- <div>  
-	<ul>
+ <div id= "mydiv2">  
+	<ul style="height:55px;"> <br />
+		 <% if !adminsigned_in? %>
 		 <% if !signed_in? %>
 	 	 <li><%= link_to "Sign In", signin_path %></li>
 	 	 <% else %>
 	 	 	 <li><%= link_to "Profile", user_path(@current_user) %></li>
-	 	 	 	 	<%end %>
-
+	 	 <%end %>
 	 	 <li><%= link_to "Home", pages_home_path %></li>
-		 <li><%= link_to "Help", pages_help_path %></li>
-		  <% if !signed_in? %>
-			<% else %>
-	 	 	 	 <li><%= link_to "Sign Out", signout_path %></li>
-	 	 	 	 <li><%= link_to "Plan your Journey", about_path %></li>
-		 	<%end %>
-
+		 <li><%= link_to "Plan your Journey", pages_help_path %></li>
  		 <li><%= link_to "Bridge Locations", markers_path %></li>
+ 		 <li><%= link_to "About", about_path %></li>
+ 		 <% if !signed_in? %>
+		 <% else %>
+	 	 	<li><%= link_to "Sign Out", signout_path %></li>
+ 		 <%end %>
+
 	</ul>
 </div>
-</body>
  <% else %>
  <ul>
  	 <% if !adminsigned_in? %>		 
-			<% else %>
-			<%if !adminsigned_in? %>
+	     <% else %>
 	 	 <li><%= link_to "Home", pages_home_path %></li>
-		 <li><%= link_to "Help", pages_help_path %></li>
  		 <li><%= link_to "Test Page", pages_contact_path %></li>
 		 <li><%= link_to "Plan your Journey", pages_help_path %></li>
- 	 	 <li><%= link_to "Sign Out", adminsignout_path %></li>
- 	 	 <li><%= link_to "About", about_path %></li>
  		 <li><%= link_to "Bridge Locations", markers_path %></li>
+  	 	 <li><%= link_to "Sign Out", adminsignout_path %></li>
+  	 	 <li><%= link_to "Edit Account", admin_path(@current_admin)%></li>
 
-		 	<%end %>
- 		 <% end %>
+ 	<%end %>
+	 <% end %>
 	</ul>
+</div>
+</body>
 
-<div id="content">
 <%= yield -%>
 </div>
 </html>
