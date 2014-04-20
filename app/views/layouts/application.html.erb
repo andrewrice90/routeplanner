@@ -9,24 +9,25 @@
   <%= csrf_meta_tags %>
 <link rel="shortcut icon" href="/assets/favicon.ico" />
  <% if !adminsigned_in? %>
-<%= link_to "Admin Log In", adminsignin_path %>
       <% else %>
 <%= link_to " Out", adminsignout_path %>
 Signed in as <%= @current_admin.name %> 
 <% end %>
-    <title>Route Planner Pro</title>
-    <% if !signed_in? %>
+<% if !signed_in? %>
 			<% else %>
-		<div id= "mydiv" align = "right">Signed in as <%= @current_user.name %> <br>
-		 <img src="<%= @current_user.profileImage%> "width="85" height="85"align = "right" </td></div>
+		<div id= "mydiv" align = "right">Signed in as <%= @current_user.name %> 
+		 <img src="<%= @current_user.profileImage%> "width="85" height="85"align = "right" </td></div> 
 	<%end %>
+    <title>Route Planner Pro</title>
+    
 
 <h1>Route Planner Pro</h1>
 <h4>helping you get to your destination safely</h4>
+
 </head>
 </div>
 <body>
- <div id= "mydiv2">
+ <div>  
 	<ul>
 		 <% if !signed_in? %>
 	 	 <li><%= link_to "Sign In", signin_path %></li>
@@ -48,9 +49,7 @@ Signed in as <%= @current_admin.name %>
 </body>
  <% else %>
  <ul>
- 	 <% if !adminsigned_in? %>
-	 	 <li><%= link_to "Home", pages_home_path %></li>
-		 
+ 	 <% if !adminsigned_in? %>		 
 			<% else %>
 			<%if !adminsigned_in? %>
 	 	 <li><%= link_to "Home", pages_home_path %></li>
