@@ -1,9 +1,9 @@
+
+
  <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-   <center> <title>Route Planner Pro</title>
-
-
+    <title>Route Planner Pro</title>
 <center>
 <h1>Plan you journey</h1>
 
@@ -19,9 +19,7 @@ var map;
 //routeboxer
 var boxpolys = null;
 var routeBoxer = null;
-var distance = .05;
 var middleMap = new google.maps.LatLng(53.424878,-7.940766);
-
 
 function initialize() {
   var mapOptions = {
@@ -38,29 +36,23 @@ function initialize() {
   google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
     computeTotalDistance(directionsDisplay.getDirections());
   });
-
 }
 
-
 function calcRoute() {
-
+  var narrowCount = 0;
     var count = 0;
     var dangercount = 0;
   <% @markers.each do |m| %>                  
     var bridge = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);
     var myHeight = <%= m.height %>;
     var markerz = new google.maps.Marker({position:bridge});
-    markerz.setMap(map);
-
- 
+    markerz.setMap(map); 
   <% end %>
-//routeboxer
- //clearBoxes();
 
   var startPoint = document.getElementById("start").value
   var endPoint = document.getElementById("dest").value
   var stopPoint = document.getElementById("stop").value
-  
+  var distance =  .1; 
 
   var request = {
     origin: startPoint,
@@ -75,12 +67,8 @@ function calcRoute() {
       directionsDisplay.setDirections(response);
     }
       //routeboxer
-       var path = response.routes[0].overview_path;
-       var boxes = routeBoxer.box(path, distance);
-       //drawBoxes(boxes);
-      document.getElementById('points').innerHTML = "<b>Points along this route:  (" + path.length + " total</b>)"; //+ path;
-      document.getElementById('boxes').innerHTML = "<b>Boxes along this route:  (" + boxes.length + " total</b>)"; + boxes;
-
+  var path = response.routes[0].overview_path;
+  var boxes = routeBoxer.box(path, distance);
   var vehicleHeight = document.getElementById("vehicle").value
   var intVehicle = parseInt(vehicleHeight)
 
@@ -90,7 +78,6 @@ function calcRoute() {
   var height = <%= m.height %>
 
 for (var i = 0; i < boxes.length; i++) {
-
 
  var northeast = boxes[i].getNorthEast();
  var southwest = boxes[i].getSouthWest();
@@ -104,18 +91,10 @@ var latlng2 = new google.maps.LatLng(lat_south, long_east);
 var latlng3 = new google.maps.LatLng(lat_north, long_east);
 var latlng4 = new google.maps.LatLng(lat_north, long_west);
 
-
 var myBox = [latlng1, latlng2, latlng3, latlng4];
 
-   // var marker = new google.maps.Marker({position: latlng1, map:map});
-   // var marker = new google.maps.Marker({position: latlng2, map:map});
-   // var marker = new google.maps.Marker({position: latlng3, map:map});
-   // var marker = new google.maps.Marker({position: latlng4, map:map});
-
-
-
 var contentString = '<div class="infowin">' +
-        '<h5 id="h5style"><center>LOW BRIDGE</h5>' +
+        '<h5 id="h5style">LOW BRIDGE</h5>' +
         '<table class = "infotable" width="190" border="0" cellpadding="0" cellspacing="3">' +
         '<tr>' +
          '<th scope="row">Height:</th>' +
@@ -130,6 +109,20 @@ var contentString = '<div class="infowin">' +
       '</table>' +
       '</div>';
 
+var narrowString = '<div class="infowin">' +
+        '<h5 id="h5style">NARROW BRIDGE</h5>' +
+        '<table class = "infotable" width="190" border="0" cellpadding="0" cellspacing="3">' +
+        '<tr>' +
+      '<th scope="row">Latitude:</th>' +
+      '<td>' + <%= m.latitude %> + '<br />' +
+      '</tr>' +
+      '<th scope="row">Longitude:</th>' +
+      '<td>' + <%= m.longitude %> +
+      '</tr>' +
+      '</table>' +
+      '</div>';
+
+
 var bounds = new google.maps.LatLngBounds(southwest, northeast);
 
 var withinBox = new google.maps.Polygon({
@@ -137,51 +130,28 @@ var withinBox = new google.maps.Polygon({
   });
 
 if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
-  console.log("Bridge on route. Height: " + height + " meters");
     count ++;
       document.getElementById('bridgeroute').innerHTML = "Number of bridges on your route: " + count;
+      if(height == 0) {
+         narrowCount++;
+         var infowindowN = new google.maps.InfoWindow({content: narrowString});
+          infowindowN.open(map, marker1);  
+      document.getElementById('narrowbridge').innerHTML = "Number of narrow bridges on your route: " + narrowCount;
+      }
+      
       if(height > 0){
         if (intVehicle > height) {
           dangercount ++;
           var infowindow = new google.maps.InfoWindow({content: contentString});
           infowindow.open(map, marker1);  
-            document.getElementById('bridgeroute2').innerHTML = "Number of bridges blocking your route: " + dangercount;
-
+            document.getElementById('bridgeroute2').innerHTML = "Number of bridges too low your route: " + dangercount;
         }
       }
-}
-else {
-}
+  }
 }
 <% end %>
 });
-
-  //routeboxer
-  function drawBoxes(boxes) {
-      boxpolys = new Array(boxes.length);
-      for (var i = 0; i < boxes.length; i++) {
-        boxpolys[i] = new google.maps.Rectangle({
-          bounds: boxes[i],
-          fillOpacity: 0,
-          strokeOpacity: 1.0,
-          strokeColor: '#000000',
-          strokeWeight: 1,
-          map: map
-        });
-      }
-    }
-
-  //routeboxer    
-  function clearBoxes() {
-      if (boxpolys != null) {
-        for (var i = 0; i < boxpolys.length; i++) {
-          boxpolys[i].setMap(null);
-        }
-      }
-      boxpolys = null;
-    }
 }
-
   
 function computeTotalDistance(result) {
   var total = 0;
@@ -192,34 +162,37 @@ function computeTotalDistance(result) {
   total = total / 1000.0;
   document.getElementById('total').innerHTML = "Total Distance: " + total + ' km';
 }
-  google.maps.event.addDomListener(window, 'load', initialize);
-   </script>
+google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
    <body>
+  <div style="color:#58ACFA">
 
 
   <H2>  Please enter your starting point and destination </H2>
   <form id= "routeform"> <b>
+      <div id="map-canvas" style="float:left"> <br ></div>
+      <br />
       <label for="start">Start point:</label><input type="text" id="start" value="Newbrook road, Mullingar"> <br>
       <label for="stop">Stop point:</label><input type="text" id="stop" value="Harbour Street, Mullingar"> <br>
       <label for="dest">Destination:</label><input type="text" id="dest" value="Athboy">  <br>
-      <label for="">Vehicle Height:</label><input type="text" id="vehicle" value="4">  <br>
+      <label for="">Vehicle Height(m):</label><input type="text" id="vehicle" value="4">  <br>
 
-  </b></form>
-  </div>
+
+  </b><br>
   <p id="p2"><b><span id="total"></span></b></p>
-  <br />
-      <button type="submit" onclick= "calcRoute()"> Submit </button> <br> <br>
-
-  <br /> <p id="points"></p>
-  <br /> <p id="boxes"></p>
-  <br /> <p id="bridgeroute"><br /></p>
-    <h5 id="h5style"><br /><p id="bridgeroute2"></p></h5> 
+  <p id="bridgeroute"><br /></p>
+  <h5 id="h5style"><p id="bridgeroute2"></p></h5> 
+  <h5 id="h5style"><p id="narrowbridge"></p></h5>
+  <p id="noNarrowbridge"></p> 
+  
     </div>
-    <div id="mydiv">
-    <div id="map-canvas" style="float:center"> <br ></div>
+  </form>
     <div id="directionsPanel" style="float:left;width:55%;height 90%"> </div>
   <div id="textFields" style="float:right;width:20%; height:90%"> </div>
-</div>
+      <button type="submit" onclick= "calcRoute()"> Submit </button> <br> <br>
+
+<div>
  </center>
 
 </body>

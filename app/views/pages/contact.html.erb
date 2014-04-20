@@ -173,18 +173,16 @@ if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
           var infowindow = new google.maps.InfoWindow({content: contentString});
           infowindow.open(map, marker1);  
             document.getElementById('bridgeroute2').innerHTML = "Number of bridges too low your route: " + dangercount;
-  console.log(totalCount);
         }
       }
+ document.getElementById('check').innerHTML = "Check carried out: " + totalCount;
+
 }
 else {
 }
 }
 <% end %>
 });
-  console.log(dangercount);
-  console.log(count);
-
   //routeboxer
   function drawBoxes(boxes) {
       boxpolys = new Array(boxes.length);
