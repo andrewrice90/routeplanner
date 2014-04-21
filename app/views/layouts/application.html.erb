@@ -13,8 +13,8 @@ Signed in as Admin <b><%= @current_admin.name %></b> <%= link_to "(Sign Out)", a
 <% end %>
 <% if !signed_in? %>
 			<% else %>
-		<div id= "mydiv" align = "right">Signed in as <%= @current_user.name %> 
-		 <img src="<%= @current_user.profileImage%> "width="85" height="85"align = "right" </td></div> 
+		<div id= "mydiv" align = "right">Signed in as <b><%= link_to @current_user.name, user_path(@current_user)  %></b>
+		<img src="<%= @current_user.profileImage%>" width="85" height="85" align = "right"></td></div> 
 	<%end %>
     <title>Route Planner Pro</title>
     
