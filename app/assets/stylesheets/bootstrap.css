@@ -65,8 +65,8 @@ li a:hover {
 
 #map-canvas, #directionsPanel {
 	overflow: hidden;
-	width: 870px;
-	height:880px;
+	width: 670px;
+	height:680px;
   margin: 7px;
   padding: 5px;
 }

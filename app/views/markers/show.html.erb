@@ -17,7 +17,11 @@
   <tr>
     <td><%= @marker.address %></td>
     <td><%= @marker.county %></td>
-    <td><%= @marker.height %></td>
+    <% if @marker.height == 0 %>
+      <td> <b>Narrow Bridge </b></td>
+   <% else %>
+       <td><%= @marker.height %></td>
+    <% end %>
     <td><%= @marker.latitude %></td>
     <td><%= @marker.longitude %></td>
 
@@ -25,6 +29,8 @@
 </table>
 <br />
 
-
+<% if !adminsigned_in? %>
+      <% else %>
 <%= link_to 'Edit Bridge Details', edit_marker_path(@marker) %> |
+<% end %>
 <%= link_to 'Return to Bridge Locations', markers_path %>

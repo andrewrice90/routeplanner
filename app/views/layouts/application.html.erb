@@ -30,16 +30,13 @@ Signed in as Admin <b><%= @current_admin.name %></b> <%= link_to "(Sign Out)", a
 		 <% if !signed_in? %>
 	 	 <li><%= link_to "Sign In", signin_path %></li>
 	 	 <% else %>
-	 	 	 <li><%= link_to "Profile", user_path(@current_user) %></li>
+	 	 	<li><%= link_to "Sign Out", signout_path %></li>
 	 	 <%end %>
 	 	 <li><%= link_to "Home", pages_home_path %></li>
 		 <li><%= link_to "Plan your Journey", pages_help_path %></li>
  		 <li><%= link_to "Bridge Locations", markers_path %></li>
  		 <li><%= link_to "About", about_path %></li>
- 		 <% if !signed_in? %>
-		 <% else %>
-	 	 	<li><%= link_to "Sign Out", signout_path %></li>
- 		 <%end %>
+ 		
 
 	</ul>
 </div>
@@ -51,7 +48,6 @@ Signed in as Admin <b><%= @current_admin.name %></b> <%= link_to "(Sign Out)", a
  		 <li><%= link_to "Test Page", pages_contact_path %></li>
 		 <li><%= link_to "Plan your Journey", pages_help_path %></li>
  		 <li><%= link_to "Bridge Locations", markers_path %></li>
-  	 	 <li><%= link_to "Sign Out", adminsignout_path %></li>
   	 	 <li><%= link_to "Edit Account", admin_path(@current_admin)%></li>
 
  	<%end %>

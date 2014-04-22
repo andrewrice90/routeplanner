@@ -82,9 +82,8 @@ function calcRoute() {
        var path = response.routes[0].overview_path;
        var boxes = routeBoxer.box(path, distance);
           drawBoxes(boxes);
-      document.getElementById('points').innerHTML = "<b>Points along this route:  (" + path.length + " total</b>)"; //+ path;
-      document.getElementById('boxes').innerHTML = "<b>Boxes along this route:  (" + boxes.length + " total</b>)"; + boxes;
-      document.getElementById('boxes').innerHTML = "<b>Boxes along this route:  (" + boxes.length + " total</b>)"; + boxes;
+      document.getElementById('points').innerHTML = "Points along this route: <br /><b>" + path.length + " total</b>  "; //+ path;
+      document.getElementById('boxes').innerHTML = "Boxes along this route:  <br /><b>" + boxes.length + " total</b>"; + boxes;
 
 
   var vehicleHeight = document.getElementById("vehicle").value
@@ -160,22 +159,22 @@ totalCount++;
 if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
   console.log("Bridge on route. Height: " + height + " meters");
     count ++;
-      document.getElementById('bridgeroute').innerHTML = "Number of bridges on your route: " + count;
+      document.getElementById('bridgeroute').innerHTML = "Number of bridges on your route: <br /><b>" + count + "</b>";
       if(height == 0) {
         narrowCount++;
          var infowindowN = new google.maps.InfoWindow({content: narrowString});
           infowindowN.open(map, marker1);  
-      document.getElementById('narrowbridge').innerHTML = "Number of narrow bridges on your route: " + narrowCount;
+      document.getElementById('narrowbridge').innerHTML = "Number of narrow bridges on your route: <br /><b>" + narrowCount + "</b>";
       }
       if(height > 0){
         if (intVehicle > height) {
           dangercount ++;
           var infowindow = new google.maps.InfoWindow({content: contentString});
           infowindow.open(map, marker1);  
-            document.getElementById('bridgeroute2').innerHTML = "Number of bridges too low your route: " + dangercount;
+            document.getElementById('bridgeroute2').innerHTML = "Number of bridges too low your route: <br /><b>" + dangercount + "</b>";
         }
       }
- document.getElementById('check').innerHTML = "Check carried out: " + totalCount;
+ document.getElementById('check').innerHTML = "Check carried out: <br /><b> " + totalCount + "</b>";
 
 }
 else {
@@ -217,7 +216,7 @@ function computeTotalDistance(result) {
     total += myroute.legs[i].distance.value;
   }
   total = total / 1000.0;
-  document.getElementById('total').innerHTML = "Total Distance: " + total + ' km';
+  document.getElementById('total').innerHTML = "Total Distance: <br /><b>" + total + ' km </b>';
 }
 
   google.maps.event.addDomListener(window, 'load', initialize);
@@ -238,18 +237,18 @@ function computeTotalDistance(result) {
 
 
   </b><br>
-  <p id="p2"><b><span id="total"></span></b></p>
+ <div style="margin: 10px 0px 10px 700px; background-color: white; width: 300px; border: 2px solid Grey">
+  <p><b><span id="total"></span></b></p>
   <br /> <p id="points"></p>
   <br /> <p id="boxes"></p>
   <br /> <p id="check"></p>
   <br /> <p id="bridgeroute"><br /></p>
   <h5 id="h5style"><br /><p id="narrowbridge"></p></h5> 
   <h5 id="h5style"><br /><p id="bridgeroute2"></p></h5> 
-    </div>
+    </div> 
   </form>
+      <button type="submit" onclick= "calcRoute()"> Submit </button> 
     <div id="directionsPanel" style="float:left;width:55%;height 90%"> </div>
-  <div id="textFields" style="float:right;width:20%; height:90%"> </div>
-      <button type="submit" onclick= "calcRoute()"> Submit </button> <br> <br>
 
 <div>
  </center>

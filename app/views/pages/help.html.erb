@@ -52,7 +52,7 @@ function calcRoute() {
   var startPoint = document.getElementById("start").value
   var endPoint = document.getElementById("dest").value
   var stopPoint = document.getElementById("stop").value
-  var distance =  .1; 
+  var distance =  .01; 
 
   var request = {
     origin: startPoint,
@@ -166,6 +166,7 @@ function computeTotalDistance(result) {
   total = total / 1000.0;
   document.getElementById('total').innerHTML = "Total Distance: " + total + ' km';
 }
+
 google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>
@@ -184,9 +185,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 
   </b><br>
-  <p id="p2"><b><span id="total"></span></b></p>
+  <div style="margin: 10px 0px 10px 700px; background-color: white; width: 200px; border: 2px solid Grey">
+  <p><b><span id="total"></span></b></p>
   <p id="bridgeroute"><br /></p>
-    <p id="duration"><br /></p>
   <h5 id="h5style"><p id="bridgeroute2"></p></h5> 
   <h5 id="h5style"><p id="narrowbridge"></p></h5>
   <p id="noNarrowbridge"></p> 
@@ -195,8 +196,11 @@ google.maps.event.addDomListener(window, 'load', initialize);
   </form>
         <button type="submit" onclick= "calcRoute()"> Submit </button> <br> <br>
 
-    <div id="directionsPanel" style="float:right;width:40%;height 90%"> </div>
+    <div id="directionsPanel" style="float:right;width:44%;height 90%"> </div>
   <div id="textFields" style="float:right;width:20%; height:90%"> </div>
  </center>
+<script type="text/javascript">
+ document.write("Hey Ronan");
+</script>
 
 </body>
