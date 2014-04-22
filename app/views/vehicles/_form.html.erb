@@ -4,8 +4,8 @@
       <h2><%= pluralize(@vehicle.errors.count, "error") %> prohibited this vehicle from being saved:</h2>
 
       <ul>
-      <% @vehicle.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+       <div align="center"><% @vehicle.errors.full_messages.each do |msg| %>
+       <li><%= msg %></li> </div>
       <% end %>
       </ul>
     </div>
@@ -20,7 +20,7 @@
     <%= f.text_field :decription %>
   </div>
   <div class="field">
-    <%= f.label :height %><br />
+    <%= f.label "Height (m)" %><br />
     <%= f.text_field :height %>
   </div>
 
@@ -28,23 +28,20 @@
     <%= f.label "Trailer" %><br />
     <%= check_box_tag :truck %>
   </div>
-  <% if check_box_tag :truck =>true %>
-    <div class="field">
-    <%= f.label "Trailer Height" %><br />
+
+    <div id="ddd">
+    <%= f.label "Trailer Height(m)" %><br />
     <%= f.text_field :trailer %>
-   <% else %>
-          console.log("error");
-    </div>
-   <% end %>
-  
+  </div>
+  <br />
      <div class="field">
       Car image uploader: <br />
        <%= f.file_field :carImageUploader %>
-  </div>
+  </div> <br />
    
 
-  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+  <br />
 <% end %>

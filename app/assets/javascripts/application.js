@@ -13,3 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+jQuery(document).ready(function($){
+	$('#ddd').hide();
+	
+	$('#truck').click(function() {
+	    $("#ddd").toggle(this.checked);
+	});
+});

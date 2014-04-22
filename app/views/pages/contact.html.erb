@@ -45,18 +45,16 @@ function initialize() {
 
 
 function calcRoute() {
-
+  //window.location.reload();
   var totalCount = 0;
   var narrowCount = 0;
-    var count = 0;
-    var dangercount = 0;
+  var count = 0;
+  var dangercount = 0;
   <% @markers.each do |m| %>                  
     var bridge = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);
     var myHeight = <%= m.height %>;
     var markerz = new google.maps.Marker({position:bridge});
-    markerz.setMap(map);
-
- 
+    markerz.setMap(map); 
   <% end %>
 //routeboxer
  clearBoxes();
@@ -82,7 +80,7 @@ function calcRoute() {
        var path = response.routes[0].overview_path;
        var boxes = routeBoxer.box(path, distance);
           drawBoxes(boxes);
-      document.getElementById('points').innerHTML = "Points along this route: <br /><b>" + path.length + " total</b>  "; //+ path;
+      document.getElementById('points').innerHTML = "Points along this route: <br /><b>" + path.length + " total</b>  "; 
       document.getElementById('boxes').innerHTML = "Boxes along this route:  <br /><b>" + boxes.length + " total</b>"; + boxes;
 
 
@@ -157,7 +155,8 @@ var withinBox = new google.maps.Polygon({
 totalCount++;
 
 if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
-  console.log("Bridge on route. Height: " + height + " meters");
+  var loc = document.getElementById('locations');
+  loc.appendChild(document.createTextNode(height + " meters "));
     count ++;
       document.getElementById('bridgeroute').innerHTML = "Number of bridges on your route: <br /><b>" + count + "</b>";
       if(height == 0) {
@@ -174,11 +173,9 @@ if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
             document.getElementById('bridgeroute2').innerHTML = "Number of bridges too low your route: <br /><b>" + dangercount + "</b>";
         }
       }
- document.getElementById('check').innerHTML = "Check carried out: <br /><b> " + totalCount + "</b>";
+ document.getElementById('check').innerHTML = "Checks carried out: <br /><b> " + totalCount + "</b>";
+}
 
-}
-else {
-}
 }
 <% end %>
 });
@@ -238,7 +235,7 @@ function computeTotalDistance(result) {
 
   </b><br>
  <div style="margin: 10px 0px 10px 700px; background-color: white; width: 300px; border: 2px solid Grey">
-  <p><b><span id="total"></span></b></p>
+  <p><b><span id="total", :placeholder => Route Details will load here </span></b></p>
   <br /> <p id="points"></p>
   <br /> <p id="boxes"></p>
   <br /> <p id="check"></p>
@@ -248,9 +245,12 @@ function computeTotalDistance(result) {
     </div> 
   </form>
       <button type="submit" onclick= "calcRoute()"> Submit </button> 
-    <div id="directionsPanel" style="float:left;width:55%;height 90%"> </div>
-
-<div>
+      <input type="submit" value="Clear Page" onClick="window.location.reload()">
+    <h2> Bridges along your route: </h2>
+        <div id="directionsPanel" style="float:left;width:55%;height 90%"> </div>
+     <div style="margin: 10px 0px 10px 700px; background-color: white; width: 300px; border: 2px solid Grey">
+     <p id="locations"></p>
+     </div>
  </center>
 
 </body>
