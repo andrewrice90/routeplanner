@@ -72,6 +72,9 @@ function calcRoute() {
     }
       //routeboxer
   var path = response.routes[0].overview_path;
+  if(overview_path = null) {
+        alert("Invalid route, please try again");
+}
   var boxes = routeBoxer.box(path, distance);
   var vehicleHeight = document.getElementById("vehicle").value
   var intVehicle = parseInt(vehicleHeight)
@@ -198,8 +201,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <input type="submit" value="Clear Page" onClick="window.location.reload()">
 
 
-    <div id="directionsPanel" style="float:right;width:44%;height 90%"> </div>
-  <div id="textFields" style="float:right;width:20%; height:90%"> </div>
+    <div id="directionsPanel" style="float:right;width:44%;height 100%"> </div>
  </center>
 
   <div  style="float:left;width:45%; height:50%; margin:2%">

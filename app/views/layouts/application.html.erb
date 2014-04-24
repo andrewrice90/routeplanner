@@ -25,7 +25,7 @@ Signed in as Admin <b><%= @current_admin.name %></b> <%= link_to "(Sign Out)", a
 </div>
 <body>
  <div id= "mydiv2">  
-	<ul style="height:55px;"> <br />
+	<ul style="height:50px;"> <br />
 		 <% if !adminsigned_in? %>
 		 <% if !signed_in? %>
 	 	 <li><%= link_to "Sign In", signin_path %></li>

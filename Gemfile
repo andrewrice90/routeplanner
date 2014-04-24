@@ -20,7 +20,9 @@ group :assets do
   gem 'nokogiri'
   gem 'geocoder'
   gem "geokit", "~> 1.8.4"
-  
+  group :development do
+  gem "rails-erd"
+  end
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
