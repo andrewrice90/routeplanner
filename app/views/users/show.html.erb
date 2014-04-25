@@ -1,5 +1,5 @@
 <center><p id="notice"><%= notice %></p>
-
+<br />
 <p>
       <td><img src="<%= @user.profileImage %>"width="250" height="250" align="center"></td>
 
@@ -21,12 +21,12 @@
     <th>Description</th>
         <th></th>
     <th>Height</th>
+    <th>Trailer Height</th>
     <th></th>
     <th></th>
     <th></th>
 
   </tr>
-<b>Vehicles:</b>
  
 
 <% @user.vehicles.each do |vehicle| %>
@@ -35,17 +35,22 @@
       <td><%= vehicle.decription %></td>
       <td><img src="<%= vehicle.carImageUploader %>"width="75" height="45" align="center"></td>
       <td><%= vehicle.height %> m</td> 
+      <% if vehicle.trailer == nil %>
+        <td>  No Trailer  </td>
+        <% else %>
+      <td><%= vehicle.trailer %> m</td>
+      <% end %> 
        <td><%= link_to 'View', vehicle %></td>
        <td><%= link_to 'Update', edit_vehicle_path(vehicle) %></td>
        <td><%= link_to 'Delete', vehicle, confirm: 'Are you sure?', method: :delete %></td>
       <% end %>
       </tr>
-      <%= link_to ' Add Vehicle', new_vehicle_path %> 
 
 
 </p>
 </table> <br />
 
 <%= link_to 'Edit Profile', edit_user_path(@user) %> |
-<%= link_to 'Sign Out', signout_path %> |
-<%= link_to 'Home', pages_home_path %>
+      <%= link_to ' Add Vehicle', new_vehicle_path %> 
+
+

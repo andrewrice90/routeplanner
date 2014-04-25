@@ -1,7 +1,10 @@
 <center>
+  <% if adminsigned_in? %>
+  <% else %>
   <% if !signed_in? %>
   Please sign in to plan your journey or <h3><%= link_to "Sign up now!", new_user_path %></h3> </li>
   <% else %>
+  <%end %>
   <%end %>
  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script>

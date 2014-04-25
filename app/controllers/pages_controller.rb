@@ -1,8 +1,8 @@
 class PagesController < ApplicationController
 
-	before_filter :authorise, :only => :help
+  before_filter :authorise, :only => :help
   def home
-	 @markers = Marker.all
+   @markers = Marker.all
   end
 
   def about

@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
    user = User.find_by_email(params[:email])  
    if user && user.authenticate(params[:password])
    session[:user_id] = user.id
-   redirect_to session[:return_to] || root_path
+     redirect_to root_path
    else       
   flash.now[:error] = "Invalid name/password combination."
   render 'new' 
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
   else
     flash[:notice] = "You need to sign in first"
   end
-  redirect_to signin_path
+  redirect_to root_path
  end
  def new 
  
@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
 
     session[:admin_id] = admin.id 
      flash.now[:error] = "Thank you for logging in"
-     redirect_to pages_adminHome_path
+     redirect_to root_path
    else       
   flash.now[:error] = "Invalid name/password combination."       
    render 'new'             
