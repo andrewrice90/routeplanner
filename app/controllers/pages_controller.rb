@@ -17,6 +17,6 @@ class PagesController < ApplicationController
 
   def help
    @markers = Marker.all
-   @vehicle = @current_user.vehicles.first
+   @vehicle = Vehicle.find(params[:vehicles])
   end
 end

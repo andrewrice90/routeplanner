@@ -9,9 +9,10 @@ end
 
 def signed_in?
        if session[:user_id].nil?
-	return
+  return
        else
-	@current_user = User.find_by_id(session[:user_id])
+  @current_user = User.find_by_id(session[:user_id])
+  @vehicles = @current_user.vehicles
        end
   end
   

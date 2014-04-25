@@ -44,7 +44,8 @@ function calcRoute() {
     var dangercount = 0;
   <% @markers.each do |m| %>                  
     var bridge = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);
-    var myHeight = <%= m.height %>;
+    //var myHeight = <%= m.height %>;
+    var vehicleHeight = <%= @vehicle.height %>;
     var markerz = new google.maps.Marker({position:bridge});
     markerz.setMap(map); 
   <% end %>
@@ -76,8 +77,8 @@ function calcRoute() {
         alert("Invalid route, please try again");
 }
   var boxes = routeBoxer.box(path, distance);
-  var vehicleHeight = document.getElementById("vehicle").value
-  var intVehicle = parseInt(vehicleHeight)
+  //var vehicleHeight = document.getElementById("vehicle").value
+  //var intVehicle = parseInt(vehicleHeight)
 
 <% @markers.each do |m| %> 
   var bridge1 = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);  
@@ -147,7 +148,7 @@ if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
       }
       
       if(height > 0){
-        if (intVehicle > height) {
+        if (vehicleHeight > height) {
           dangercount ++;
           var infowindow = new google.maps.InfoWindow({content: contentString});
           infowindow.open(map, marker1);  
@@ -184,7 +185,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <label for="start">Start point:</label><input type="text" id="start" value="Newbrook road, Mullingar"> <br>
       <label for="stop">Stop point:</label><input type="text" id="stop" value="Harbour Street, Mullingar"> <br>
       <label for="dest">Destination:</label><input type="text" id="dest" value="Athboy">  <br>
-      <label for="">Vehicle Height(m):</label><input type="text" id="vehicle" value="4">  <br>
+      <label for="">Vehicle Height(m):</label><p id="vehicle" > </p> <br>  <br>
 
 
   </b><br>

@@ -18,9 +18,9 @@ Routeplanner::Application.routes.draw do
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
   match '/about', :to => 'pages#about'
-
+  match '/help', :to => 'pages#help'
   match '/adminsignin',  :to => 'sessions#newAdmin'
-  match '/adminsignout', :to => 'pages#home'
+  match '/adminsignout', :to => 'sessions#destroyAdmin'
   match '/admincreate',  :to => 'sessions#createAdmin'
   
   match '/search',  :to =>  'markers#search'
