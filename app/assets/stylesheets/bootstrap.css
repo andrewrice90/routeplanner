@@ -4,11 +4,17 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;	  
 }
+
+#total {
+color:#000000
+
+
+}
 #container {  
     width:960px;  
     height:132px;  
     margin:0 auto;  
-    background:transparent url(jch.jpg);  
+   // background:transparent url(jch.jpg);  
 } 
 #menuwrap {  
     width:100%;  
@@ -18,30 +24,74 @@ html {
 }  
 
 #content {
-      background-image: url(jch.jpg);
+      //background-image: url(jch.jpg);
    }
 
 #content2 {
-    background-image: url(jch.jpg);
+    //background-image: url(jch.jpg);
 }
 
-#mydiv { //header and body
+#mydiv, #infowin { 
    margin: 0 auto;
   background-image: url(jch.jpg);
   background-color:#D8D8D8;
   background-repeat: no-repeat;
   background-size: 100%;
+  color:#58ACFA
+}
+#div1{ //header and body
+   margin: 0 auto;
+  background-image: url(jch.jpg);
+  background-color:#D8D8D8;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  //color:#58ACFA
 }
 
 #mydiv2 {
+   margin: 0 auto;
+  background-image: url(jch.jpg);
+  background-color:#D8D8D8;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  color:#FFFFFF
+}
+
+#resultdiv, #locations {
+   margin: 0 auto;
+  //background-image: url(jch.jpg);
+ //background-color:#D8D8D8;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  color:#58ACFA
+}
+
+#menubar {
   margin: 0 auto;
   //background-image: url(jh1.jpg);
   background-color:#D8D8D8;
   background-repeat: no-repeat;
   background-size: 100%;
 }
-ul a {
 
+#adminmenubar {
+  margin: 0 auto;
+  //background-image: url(jh1.jpg);
+  background-color:#D8D8D8;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+#adminul {
+margin: 0px;
+padding: 0px;
+padding-right: 10px;
+display: block;
+line-height: 17px;
+font-size: 17px;
+font-weight:bold;
+}
+#userul{
 margin: 0px;
 padding: 0px;
 padding-right: 30px;
@@ -51,12 +101,20 @@ line-height: 17px;
 font-size: 17px;
 font-weight:bold;
 }
+ul a {
+padding-right: 20px;
+padding-left: 120px;
+
+}
 
 ul {
   margin: auto;
   overflow: auto;
   list-style-type: none;
 }
+
+
+
 /*sets colour of menu item on hover */
 li a:hover {
   color: #0B3861;
@@ -72,10 +130,18 @@ li a:hover {
   background-color:#ffffff;
 }
 
-#map-canvas, #directionsPanel {
+#map-canvas {
 	overflow: hidden;
 	width: 678px;
 	height:680px;
+  margin: 7px;
+  padding: 5px;
+}
+
+#directionsPanel {
+  overflow: hidden;
+  width: 678px;
+  height:880px;
   margin: 7px;
   padding: 5px;
 }
@@ -90,9 +156,11 @@ table.infotable{
   border-width: 3px;
   padding: 8px;
   border-style: solid;
+    color:#58ACFA
+
 }
 table.infotable td, table.infotable th  {
-  background-color:#81F781;
+  background-color:#CEF6F5;
 }
 
 table.hovertable, table.hovertable2 {

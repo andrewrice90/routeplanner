@@ -1,20 +1,23 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b>Name:</b><br />
   <%= @admin.name %>
 </p>
-
+<br />
 <p>
-  <b>Email:</b>
+  <b>Email:</b><br />
   <%= @admin.email %>
 </p>
-
+<br />
 <p>
-  <b>Position:</b>
+  <b>Position:</b><br />
   <%= @admin.position %>
 </p>
-
+<br />
 
 <%= link_to 'Edit', edit_admin_path(@admin) %> |
-<%= link_to 'Back', admins_path %>
+<b><%= link_to 'Create new admin', new_admin_path %> </b>|
+<b><%= link_to 'View Administrators', admins_path %> </b>
+
+

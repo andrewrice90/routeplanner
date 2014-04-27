@@ -2,7 +2,7 @@
 <html>
 <head>
 
-	<div id="mydiv"; align= "center">
+	<div id="div1"; align= "center">
 	<%= stylesheet_link_tag    "bootstrap", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -13,7 +13,7 @@ Signed in as Admin <b><%= @current_admin.name %></b> <%= link_to "(Sign Out)", a
 <% end %>
 <% if !signed_in? %>
 			<% else %>
-		<div id= "mydiv" align = "right">Signed in as <b><%= link_to @current_user.name, user_path(@current_user)  %></b>
+		<div id= "div1" align = "right">Signed in as <b><%= link_to @current_user.name, user_path(@current_user)  %></b>
 		<img src="<%= @current_user.profileImage%>" width="85" height="85" align = "right"></td></div> 
 	<%end %>
     <title>Route Planner Pro</title>
@@ -24,9 +24,9 @@ Signed in as Admin <b><%= @current_admin.name %></b> <%= link_to "(Sign Out)", a
 </head>
 </div>
 <body>
- <div id= "mydiv2">  
-	<ul style="height:50px;"> <br />
 		 <% if !adminsigned_in? %>
+ <div id= "menubar">  
+	<ul id= "userul" style="height:50px;"> <br />
 		 <% if !signed_in? %>
 	 	 <li><%= link_to "Sign In", signin_path %></li>
 	 	 <% else %>
@@ -44,7 +44,8 @@ Signed in as Admin <b><%= @current_admin.name %></b> <%= link_to "(Sign Out)", a
 	<% end %>
 </div>
  <% else %>
- <ul>
+  <div id= "adminmenubar">  
+	<ul id= "adminul" style="height:50px;"> <br />
  	 <% if !adminsigned_in? %>		 
 	     <% else %>
 	 	 <li><%= link_to "Home", pages_home_path %></li>
@@ -55,7 +56,7 @@ Signed in as Admin <b><%= @current_admin.name %></b> <%= link_to "(Sign Out)", a
  		 <%end %>
  		 <li><%= link_to "Bridge Locations", markers_path %></li>
   		 <li><%= link_to "Users", users_path %></li>
-  	 	 <li><%= link_to "Edit Account", admin_path(@current_admin)%></li>
+  	 	 <li><%= link_to "Settings", admin_path(@current_admin)%></li>
 
  	<%end %>
 	 <% end %>
