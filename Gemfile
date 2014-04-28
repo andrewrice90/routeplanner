@@ -23,7 +23,7 @@ group :assets do
   group :development do
   gem "rails-erd"
   end
-
+gem 'client_side_validations'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
 

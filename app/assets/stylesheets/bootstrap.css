@@ -57,13 +57,23 @@ color:#000000
   color:#FFFFFF
 }
 
-#resultdiv, #locations {
+#resultdiv {
    margin: 0 auto;
   //background-image: url(jch.jpg);
  //background-color:#D8D8D8;
   background-repeat: no-repeat;
   background-size: 100%;
   color:#58ACFA
+}
+
+#locations {
+   margin: 0 auto;
+  //background-image: url(jch.jpg);
+ //background-color:#D8D8D8;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  color:#58ACFA;
+  width: 89px;
 }
 
 #menubar {
@@ -150,7 +160,14 @@ li a:hover {
   padding: 4;
 }
 
- 
+ table.infopopup{
+  border-width: 3px;
+  padding: 8px;
+  border-style: solid;
+ color:#000000;
+  background-color:#CEF6F5;
+
+}
 
 table.infotable{
   border-width: 3px;

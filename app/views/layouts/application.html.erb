@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<% if !flash.nil? %>
+		<% flash.each do |key, value| %>
+          <div class="flash <%= key %>"><%= value %></div>
+		<% end %>
+ <% end %>
 	<div id="div1"; align= "center">
 	<%= stylesheet_link_tag    "bootstrap", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "application"%>
   <%= csrf_meta_tags %>
 <link rel="shortcut icon" href="/assets/favicon.ico" />
  <% if !adminsigned_in? %>

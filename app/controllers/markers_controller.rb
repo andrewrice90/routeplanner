@@ -1,7 +1,7 @@
 class MarkersController < ApplicationController
   # GET /markers
   # GET /markers.json
-
+  before_filter :adminauthorise, :only => [:new, :create, :destroy, :edit]
   helper_method :sort_column, :sort_direction
 
   def index
@@ -17,8 +17,6 @@ def search
   @markers = Marker.search params[:q]
   render 'index'
 end
-
-  before_filter :authorise, :only => [:new, :create, :destroy, :edit]
 
 
   # GET /markers/1

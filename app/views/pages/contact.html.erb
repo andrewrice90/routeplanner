@@ -5,8 +5,6 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Route Planner Pro</title>
-
-
 <center>
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
@@ -44,7 +42,6 @@ function initialize() {
 
 
 function calcRoute() {
-  //window.location.reload();
   var totalCount = 0;
   var narrowCount = 0;
   var count = 0;
@@ -93,7 +90,6 @@ function calcRoute() {
 
 for (var i = 0; i < boxes.length; i++) {
 
-
  var northeast = boxes[i].getNorthEast();
  var southwest = boxes[i].getSouthWest();
  var lat_north = northeast.lat();
@@ -118,7 +114,7 @@ var myBox = [latlng1, latlng2, latlng3, latlng4];
 
 var contentString = '<div class="infowin">' +
         '<h5 id="h5style">LOW BRIDGE</h5>' +
-        '<table class = "infotable" width="190" border="0" cellpadding="0" cellspacing="3">' +
+        '<table class = "infopopup" width="190" border="0" cellpadding="0" cellspacing="3">' +
         '<tr>' +
          '<th scope="row">Height:</th>' +
       '<td> <b><i>' + height + 'm</i></b> </td>' +
@@ -134,7 +130,7 @@ var contentString = '<div class="infowin">' +
 
 var narrowString = '<div class="infowin">' +
         '<h5 id="h5style">NARROW BRIDGE</h5>' +
-        '<table class = "infotable" width="190" border="0" cellpadding="0" cellspacing="3">' +
+        '<table class = "infopopup" width="190" border="0" cellpadding="0" cellspacing="3">' +
         '<tr>' +
       '<th scope="row">Latitude:</th>' +
       '<td>' + <%= m.latitude %> + '<br />' +
@@ -145,14 +141,13 @@ var narrowString = '<div class="infowin">' +
       '</table>' +
       '</div>';
 
+totalCount++;
 
 var bounds = new google.maps.LatLngBounds(southwest, northeast);
 
 var withinBox = new google.maps.Polygon({
     paths: myBox
   });
-totalCount++;
-
 if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
   var loc = document.getElementById('locations');
   loc.appendChild(document.createTextNode(height + " meters "));
@@ -172,8 +167,8 @@ if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
             document.getElementById('bridgeroute2').innerHTML = "Number of bridges too low your route: <br /><b>" + dangercount + "</b>";
         }
       }
- document.getElementById('check').innerHTML = "Checks carried out: <br /><b> " + totalCount + "</b>";
 }
+ document.getElementById('check').innerHTML = "Checks carried out: <br /><b> " + totalCount + "</b>";
 
 }
 <% end %>
@@ -247,7 +242,7 @@ function computeTotalDistance(result) {
 
     <h2> Bridges along your route: </h2>
         <div id="resultdiv" style="float:left;width:55%;height 90%"> </div>
-     <div style="margin: 10px 0px 10px 700px; background-color: white; width: 300px; border: 2px solid Grey">
+     <div style="margin: 10px 0px 10px 700px; background-color: white; width: 100px; border: 2px solid Grey">
      <b><p id="locations"></p></b>
      </div>
  </center>

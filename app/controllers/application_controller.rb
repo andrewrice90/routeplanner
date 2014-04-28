@@ -11,6 +11,13 @@ class ApplicationController < ActionController::Base
         end
   end
 
+    def adminauthorise
+        unless adminsigned_in?
+           store_location
+           redirect_to signin_path, :notice => "Please sign in to access this page."
+        end
+  end
+
    def store_location
        session[:return_to] = request.fullpath
    end
