@@ -13,4 +13,12 @@ class Blogmailer < ActionMailer::Base
     mail(:to => user.email, :subject => "Welcome to the site") 
  end
 
+
+  def registervehicle(user, vehicle) 
+   @user = user 
+   @vehicle = vehicle
+    mail(:to => user.email, :subject => "You have successfully created a new Vehicle") 
+ end
+
+
 end

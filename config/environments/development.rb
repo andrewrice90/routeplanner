@@ -43,8 +43,8 @@ Routeplanner::Application.configure do
          :port           => 587, 
          :domain         => 'www.example.com', 
          :authentication => :plain,
-         :user_name => 'andrewrice90@gmail.com',
-         :password => 'janehonner1'
+         :user_name => 'routeplannerproireland@gmail.com',
+         :password => 'routeplanner'
 }
 
 end

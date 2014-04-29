@@ -84,6 +84,7 @@ function calcRoute() {
   var intVehicle = parseInt(vehicleHeight)
 
 <% @markers.each do |m| %> 
+  count ++;
   var bridge1 = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);  
   var marker1 = new google.maps.Marker({position: bridge1, map:map});
   var height = <%= m.height %>

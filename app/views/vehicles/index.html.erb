@@ -18,8 +18,12 @@
     <td><%= vehicle.reg %></td>
     <td><%= vehicle.decription %></td>
     <td><img src="<%= vehicle.carImageUploader %>"width="75" height="45"></td>
-    <td><%= vehicle.height  %> Meters</td>
-    <td><%= vehicle.trailer  %> Meters</td>
+    <td><b><%= vehicle.height  %></b> Meters</td>
+    <% if vehicle.trailerheight == nil %>
+        <td>  No Trailer  </td>
+        <% else %>
+  <td><b><%= vehicle.trailerheight %></b> Meters </td>
+      <% end %> 
     <td><%= vehicle.user.name %></td>
    <td><%= link_to 'View', vehicle %></td>
     <td><%= link_to 'Update', edit_vehicle_path(vehicle) %></td>

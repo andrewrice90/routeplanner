@@ -35,10 +35,10 @@
       <td><%= vehicle.decription %></td>
       <td><img src="<%= vehicle.carImageUploader %>"width="75" height="45" align="center"></td>
       <td><%= vehicle.height %> m</td> 
-      <% if vehicle.trailer == nil %>
+      <% if vehicle.trailerheight == nil %>
         <td>  No Trailer  </td>
         <% else %>
-      <td><%= vehicle.trailer %> m</td>
+      <td><%= vehicle.trailerheight %> m</td>
       <% end %> 
        <td><%= link_to 'View', vehicle %></td>
        <td><%= link_to 'Update', edit_vehicle_path(vehicle) %></td>

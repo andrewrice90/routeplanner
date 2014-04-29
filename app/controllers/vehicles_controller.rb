@@ -43,9 +43,10 @@ class VehiclesController < ApplicationController
   # POST /vehicles.json
   def create
     @vehicle = Vehicle.new(params[:vehicle])
-	@vehicle.user_id = @current_user.id
+    @vehicle.user_id = @current_user.id
     respond_to do |format|
       if @vehicle.save
+        Blogmailer.registervehicle(@current_user, @vehicle).deliver
         format.html { redirect_to @vehicle, notice: 'Vehicle was successfully created.' }
         format.json { render json: @vehicle, status: :created, location: @vehicle }
       else

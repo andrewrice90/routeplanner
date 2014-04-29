@@ -15,7 +15,11 @@
   <%= @vehicle.height %> Meters
 </p>
 <b>Trailer Height:</b>
-  <%= @vehicle.trailer %> Meters
+<% if @vehicle.trailerheight == nil %>
+        <td>  No Trailer  </td>
+        <% else %>
+  <%= @vehicle.trailerheight %> Meters
+      <% end %> 
   </p>  
 
 <p>
