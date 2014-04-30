@@ -68,21 +68,36 @@ function calcRoute() {
     travelMode: google.maps.TravelMode.DRIVING
   };
 
-  directionsService.route(request, function(response, status) {
+ directionsService.route(request, function(response, status) {
     if (status == google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
     }
+    else {
+      alert("Invalid route, please try again");
+    }
       //routeboxer
-       var path = response.routes[0].overview_path;
-       var boxes = routeBoxer.box(path, distance);
+  var path = response.routes[0].overview_path;
+  if(overview_path = null) {
+        alert("Invalid route, please try again");
+}
+  if(distance < 1) {
+    alert("Accuracy cannot be blank, please try again");
+  }
+  else {
+  var boxes = routeBoxer.box(path, distance);
+  }
           drawBoxes(boxes);
       document.getElementById('points').innerHTML = "Points along this route: <br /><b>" + path.length + " total</b>  "; 
       document.getElementById('boxes').innerHTML = "Boxes along this route:  <br /><b>" + boxes.length + " total</b>"; + boxes;
 
 
   var vehicleHeight = document.getElementById("vehicle").value
+  if(vehicleHeight < 1) {
+    alert("Please enter a vehicle height");
+  }
+  else {
   var intVehicle = parseInt(vehicleHeight)
-
+}
 <% @markers.each do |m| %> 
   count ++;
   var bridge1 = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);  

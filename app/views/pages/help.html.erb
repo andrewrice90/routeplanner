@@ -61,7 +61,7 @@ function calcRoute() {
         overallHeight = vehicleHeight;
       }
     else {
-      Alert("Error in dealing with trailer and vehicle height: help.html");
+      alert("Error in dealing with trailer and vehicle height: help.html");
   }
 
     var clearance = overallHeight + 0.5;
@@ -99,7 +99,6 @@ function calcRoute() {
   if(overview_path = null) {
         alert("Invalid route, please try again");
 }
-  var boxes = routeBoxer.box(path, distance);
 
 <% @markers.each do |m| %> 
   var bridge1 = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);  

@@ -79,7 +79,7 @@ class VehiclesController < ApplicationController
     @vehicle.destroy
 
     respond_to do |format|
-      format.html { redirect_to vehicles_url }
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end

@@ -38,7 +38,7 @@
       <% if vehicle.trailerheight == nil %>
         <td>  No Trailer  </td>
         <% else %>
-      <td><%= vehicle.trailerheight %> m</td>
+      <td align= "center"><%= vehicle.trailerheight %> m</td> 
       <% end %> 
        <td><%= link_to 'View', vehicle %></td>
        <td><%= link_to 'Update', edit_vehicle_path(vehicle) %></td>

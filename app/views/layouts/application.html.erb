@@ -41,9 +41,11 @@ Signed in as Admin <b><%= @current_admin.name %></b> <%= link_to "(Sign Out)", a
  		 <li><%= link_to "About", about_path %></li>
 	</ul>
 	<% if signed_in? %>
-	<% if @vehicles != nil %>
+	<% if @vehicles.length < 1 %>
+	 <b><%= link_to "Add a Vehicle to Plan your Journey", new_vehicle_path %> </b>
+	 <% else %>
 	<div> <%= form_tag('/help') do %>
-		<%= select_tag "vehicles", options_from_collection_for_select(@vehicles, "id", "decription"), prompt: "Select your vehicle" %>	
+		<%= select_tag "vehicles", options_from_collection_for_select(@vehicles, "id", "decription")%>	
 		<%= submit_tag 'Submit Vehicle to Plan your Journey with' %> <br /></div>
 
 	<% end %>
