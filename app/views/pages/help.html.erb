@@ -19,6 +19,7 @@ var map;
 //routeboxer
 var boxpolys = null;
 var routeBoxer = null;
+var routeBoxerBig = null;
 var middleMap = new google.maps.LatLng(53.424878,-7.940766);
 
 function initialize() {
@@ -61,7 +62,7 @@ function calcRoute() {
       alert("Error in dealing with trailer and vehicle height: help.html");
   }
 
-    var clearance = overallHeight + 1.5;
+    var clearance = overallHeight + 0.5;
     var vehicleDes = "<%= @vehicle.decription %>";
     document.getElementById('vehicle').innerHTML = vehicleHeight + " meters";
     document.getElementById('vehicleDes').innerHTML = vehicleDes;
@@ -97,8 +98,7 @@ function calcRoute() {
         alert("Invalid route, please try again");
 }
   var boxes = routeBoxer.box(path, distance);
-  //var vehicleHeight = document.getElementById("vehicle").value
-  //var intVehicle = parseInt(vehicleHeight)
+
 
 <% @markers.each do |m| %> 
   var bridge1 = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);  

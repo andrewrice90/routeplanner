@@ -19,6 +19,9 @@ var map;
 //routeboxer
 var boxpolys = null;
 var routeBoxer = null;
+var boxpolysBig = null;
+var routeBoxerBig = null;
+var distanceBig = 10;
 var middleMap = new google.maps.LatLng(53.424878,-7.940766);
 
 
@@ -31,6 +34,7 @@ function initialize() {
 
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   routeBoxer = new RouteBoxer();
+  routeBoxerBig = new RouteBoxer();
   directionsDisplay.setMap(map);
   directionsDisplay.setPanel(document.getElementById('directionsPanel'));
 
@@ -43,6 +47,8 @@ function initialize() {
 
 function calcRoute() {
   var totalCount = 0;
+  var totalCountBig = 0;
+
   var narrowCount = 0;
   var count = 0;
   var dangercount = 0;
@@ -54,11 +60,13 @@ function calcRoute() {
   <% end %>
 //routeboxer
  clearBoxes();
+ clearBoxesBig();
 
   var startPoint = document.getElementById("start").value
   var endPoint = document.getElementById("dest").value
   var stopPoint = document.getElementById("stop").value
   var distance =  document.getElementById("accuracy").value
+
 
   var request = {
     origin: startPoint,
@@ -75,9 +83,12 @@ function calcRoute() {
       //routeboxer
        var path = response.routes[0].overview_path;
        var boxes = routeBoxer.box(path, distance);
+       var boxesBig = routeBoxerBig.box(path, distanceBig);
           drawBoxes(boxes);
+          drawBoxesBig(boxesBig);
       document.getElementById('points').innerHTML = "Points along this route: <br /><b>" + path.length + " total</b>  "; 
-      document.getElementById('boxes').innerHTML = "Boxes along this route:  <br /><b>" + boxes.length + " total</b>"; + boxes;
+      document.getElementById('boxes').innerHTML = "Boxes along this route:  <br /><b>" + boxes.length;
+      document.getElementById('boxesBig').innerHTML = "BIG Boxes along this route:  <br /><b>" + boxesBig.length;
 
 
   var vehicleHeight = document.getElementById("vehicle").value
@@ -87,6 +98,35 @@ function calcRoute() {
   var bridge1 = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);  
   var marker1 = new google.maps.Marker({position: bridge1, map:map});
   var height = <%= m.height %>
+
+for (var i = 0; i < boxesBig.length; i++) {
+
+
+ var northeastB = boxesBig[i].getNorthEast();
+ var southwestB = boxesBig[i].getSouthWest();
+ var lat_northB = northeastB.lat();
+ var long_eastB = northeastB.lng();
+ var lat_southB = southwestB.lat();
+ var long_westB = southwestB.lng();
+
+var latlng1B =  new google.maps.LatLng(lat_southB, long_westB);
+var latlng2B = new google.maps.LatLng(lat_southB, long_eastB);
+var latlng3B = new google.maps.LatLng(lat_northB, long_eastB);
+var latlng4B = new google.maps.LatLng(lat_northB, long_westB);
+
+
+var myBoxBig = [latlng1B, latlng2B, latlng3B, latlng4B];
+
+
+totalCountBig++;
+
+var boundsBig = new google.maps.LatLngBounds(southwestB, northeastB);
+
+var withinBoxBig = new google.maps.Polygon({
+    paths: myBoxBig
+  });
+if(google.maps.geometry.poly.containsLocation(bridge1, withinBoxBig)){
+
 
 for (var i = 0; i < boxes.length; i++) {
 
@@ -104,11 +144,6 @@ var latlng4 = new google.maps.LatLng(lat_north, long_west);
 
 
 var myBox = [latlng1, latlng2, latlng3, latlng4];
-
-   // var marker = new google.maps.Marker({position: latlng1, map:map});
-   // var marker = new google.maps.Marker({position: latlng2, map:map});
-   // var marker = new google.maps.Marker({position: latlng3, map:map});
-   // var marker = new google.maps.Marker({position: latlng4, map:map});
 
 
 
@@ -169,10 +204,13 @@ if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
       }
 }
  document.getElementById('check').innerHTML = "Checks carried out: <br /><b> " + totalCount + "</b>";
-
 }
+}
+}
+
 <% end %>
 });
+
   //routeboxer
   function drawBoxes(boxes) {
       boxpolys = new Array(boxes.length);
@@ -197,7 +235,33 @@ if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
       }
       boxpolys = null;
     }
+
+
+function drawBoxesBig(boxesBig) {
+      boxpolysBig = new Array(boxesBig.length);
+      for (var i = 0; i < boxesBig.length; i++) {
+        boxpolysBig[i] = new google.maps.Rectangle({
+          bounds: boxesBig[i],
+          fillOpacity: 0,
+          strokeOpacity: 1.0,
+          strokeColor: '#000000',
+          strokeWeight: 1,
+          map: map
+        });
+      }
+    }
+
+  //routeboxer    
+  function clearBoxesBig() {
+      if (boxpolysBig != null) {
+        for (var i = 0; i < boxpolysBig.length; i++) {
+          boxpolysBig[i].setMap(null);
+        }
+      }
+      boxpolysBig = null;
+    }
 }
+
 
   
 function computeTotalDistance(result) {
@@ -231,6 +295,7 @@ function computeTotalDistance(result) {
   <p><b><span id="total", :placeholder => Route Details will load here </span></b></p>
   <br /> <p id="points"></p>
   <br /> <p id="boxes"></p>
+  <br /> <p id="boxesBig"></p>
   <br /> <p id="check"></p>
   <br /> <p id="bridgeroute"><br /></p>
   <h5 id="h5style"><br /><p id="narrowbridge"></p></h5> 
