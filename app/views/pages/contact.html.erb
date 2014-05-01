@@ -47,8 +47,6 @@ function initialize() {
 
 function calcRoute() {
   var totalCount = 0;
-  var totalCountBig = 0;
-
   var narrowCount = 0;
   var count = 0;
   var dangercount = 0;
@@ -116,10 +114,6 @@ var latlng4B = new google.maps.LatLng(lat_northB, long_westB);
 
 
 var myBoxBig = [latlng1B, latlng2B, latlng3B, latlng4B];
-
-
-totalCountBig++;
-
 var boundsBig = new google.maps.LatLngBounds(southwestB, northeastB);
 
 var withinBoxBig = new google.maps.Polygon({
@@ -185,6 +179,10 @@ var withinBox = new google.maps.Polygon({
   });
 if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
   var loc = document.getElementById('locations');
+  if(height == 0) {
+  loc.appendChild(document.createTextNode("Narrow"));
+  }
+  else {  
   loc.appendChild(document.createTextNode(height + " meters "));
     count ++;
       document.getElementById('bridgeroute').innerHTML = "Number of bridges on your route: <br /><b>" + count + "</b>";
@@ -203,11 +201,12 @@ if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
         }
       }
 }
+}
  document.getElementById('check').innerHTML = "Checks carried out: <br /><b> " + totalCount + "</b>";
+    }
+  }
 }
-}
-}
-
+}}
 <% end %>
 });
 

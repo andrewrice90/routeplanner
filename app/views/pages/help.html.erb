@@ -19,7 +19,9 @@ var map;
 //routeboxer
 var boxpolys = null;
 var routeBoxer = null;
+var boxpolysBig = null;
 var routeBoxerBig = null;
+var distanceBig = 10;
 var middleMap = new google.maps.LatLng(53.424878,-7.940766);
 
 function initialize() {
@@ -31,6 +33,7 @@ function initialize() {
 
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   routeBoxer = new RouteBoxer();
+  routeBoxerBig = new RouteBoxer();
   directionsDisplay.setMap(map);
   directionsDisplay.setPanel(document.getElementById('directionsPanel'));
 
@@ -70,7 +73,7 @@ function calcRoute() {
     var markerz = new google.maps.Marker({position:bridge});
     markerz.setMap(map); 
   <% end %>
-  console.log("Clearance: " + clearance + " OVerall: " + overallHeight);
+  console.log("Processing your request....... ");
   var startPoint = document.getElementById("start").value
   var endPoint = document.getElementById("dest").value
   var stopPoint = document.getElementById("stop").value
@@ -98,12 +101,38 @@ function calcRoute() {
         alert("Invalid route, please try again");
 }
   var boxes = routeBoxer.box(path, distance);
+  var boxesBig = routeBoxerBig.box(path, distanceBig);
 
 
 <% @markers.each do |m| %> 
   var bridge1 = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);  
   var marker1 = new google.maps.Marker({position: bridge1, map:map});
   var height = <%= m.height %>
+
+for (var i = 0; i < boxesBig.length; i++) {
+
+
+ var northeastB = boxesBig[i].getNorthEast();
+ var southwestB = boxesBig[i].getSouthWest();
+ var lat_northB = northeastB.lat();
+ var long_eastB = northeastB.lng();
+ var lat_southB = southwestB.lat();
+ var long_westB = southwestB.lng();
+
+var latlng1B =  new google.maps.LatLng(lat_southB, long_westB);
+var latlng2B = new google.maps.LatLng(lat_southB, long_eastB);
+var latlng3B = new google.maps.LatLng(lat_northB, long_eastB);
+var latlng4B = new google.maps.LatLng(lat_northB, long_westB);
+
+
+var myBoxBig = [latlng1B, latlng2B, latlng3B, latlng4B];
+var boundsBig = new google.maps.LatLngBounds(southwestB, northeastB);
+
+var withinBoxBig = new google.maps.Polygon({
+    paths: myBoxBig
+  });
+if(google.maps.geometry.poly.containsLocation(bridge1, withinBoxBig)){
+
 
 for (var i = 0; i < boxes.length; i++) {
 
@@ -174,13 +203,15 @@ if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
           infowindow.open(map, marker1);  
             document.getElementById('bridgeroute2').innerHTML = "Number of bridges too low your route: " + dangercount;
         }
-      }
+      }  
+    }
+
+  }
   }
 }
 <% end %>
-});
+  });
 }
-  
 function computeTotalDistance(result) {
   var total = 0;
   var myroute = result.routes[0];
@@ -189,8 +220,8 @@ function computeTotalDistance(result) {
   }
   total = total / 1000.0;
   document.getElementById('total').innerHTML = "Total Distance: " + total + ' km';
-}
 
+}
 google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>
