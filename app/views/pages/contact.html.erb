@@ -68,38 +68,22 @@ function calcRoute() {
     travelMode: google.maps.TravelMode.DRIVING
   };
 
- directionsService.route(request, function(response, status) {
+  directionsService.route(request, function(response, status) {
     if (status == google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
     }
-    else {
-      alert("Invalid route, please try again");
-    }
       //routeboxer
-  var path = response.routes[0].overview_path;
-  if(overview_path = null) {
-        alert("Invalid route, please try again");
-}
-  if(distance < 1) {
-    alert("Accuracy cannot be blank, please try again");
-  }
-  else {
-  var boxes = routeBoxer.box(path, distance);
-  }
+       var path = response.routes[0].overview_path;
+       var boxes = routeBoxer.box(path, distance);
           drawBoxes(boxes);
       document.getElementById('points').innerHTML = "Points along this route: <br /><b>" + path.length + " total</b>  "; 
       document.getElementById('boxes').innerHTML = "Boxes along this route:  <br /><b>" + boxes.length + " total</b>"; + boxes;
 
 
   var vehicleHeight = document.getElementById("vehicle").value
-  if(vehicleHeight < 1) {
-    alert("Please enter a vehicle height");
-  }
-  else {
   var intVehicle = parseInt(vehicleHeight)
-}
+
 <% @markers.each do |m| %> 
-  count ++;
   var bridge1 = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);  
   var marker1 = new google.maps.Marker({position: bridge1, map:map});
   var height = <%= m.height %>
@@ -236,7 +220,7 @@ function computeTotalDistance(result) {
       <div id="map-canvas" style="float:left"> <br ></div>
       <br />
       <label for="start">Start point:</label><input type="text" id="start" value="Newbrook road, Mullingar"> <br>
-      <label for="stop">Stop point:</label><input type="text" id="stop" value="Harbour Street, Mullingar"> <br>
+      <label for="stop">Stop point:</label><input type="text" id="stop" value="Ashe Road, Mullingar"> <br>
       <label for="dest">Destination:</label><input type="text" id="dest" value="Athboy">  <br>
       <label for="">Vehicle Height(m):</label><input type="text" id="vehicle" value="4">  <br>
       <label for="">Accuracy:(km)</label><input type="text" id="accuracy" value="1">  <br>
