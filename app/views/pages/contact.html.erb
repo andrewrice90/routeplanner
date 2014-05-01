@@ -64,6 +64,8 @@ function calcRoute() {
   var endPoint = document.getElementById("dest").value
   var stopPoint = document.getElementById("stop").value
   var distance =  document.getElementById("accuracy").value
+  var clearance =  document.getElementById("clearance").value
+  var vehicleClearance = parseFloat(clearance);
 
 
   var request = {
@@ -86,17 +88,17 @@ function calcRoute() {
           drawBoxesBig(boxesBig);
       document.getElementById('points').innerHTML = "Points along this route: <br /><b>" + path.length + " total</b>  "; 
       document.getElementById('boxes').innerHTML = "Boxes along this route:  <br /><b>" + boxes.length;
-      document.getElementById('boxesBig').innerHTML = "BIG Boxes along this route:  <br /><b>" + boxesBig.length;
+      document.getElementById('boxesBig').innerHTML = "Large Boxes along this route:  <br /><b>" + boxesBig.length;
 
 
   var vehicleHeight = document.getElementById("vehicle").value
-  var intVehicle = parseInt(vehicleHeight)
+  var intVehicle = parseFloat(vehicleHeight);
 
 <% @markers.each do |m| %> 
   var bridge1 = new google.maps.LatLng(<%= m.latitude %>, <%= m.longitude %>);  
   var marker1 = new google.maps.Marker({position: bridge1, map:map});
   var height = <%= m.height %>
-
+  var overall = intVehicle + vehicleClearance;
 for (var i = 0; i < boxesBig.length; i++) {
 
 
@@ -193,11 +195,11 @@ if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
       document.getElementById('narrowbridge').innerHTML = "Number of narrow bridges on your route: <br /><b>" + narrowCount + "</b>";
       }
       if(height > 0){
-        if (intVehicle > height) {
+        if (overall > height) {
           dangercount ++;
           var infowindow = new google.maps.InfoWindow({content: contentString});
           infowindow.open(map, marker1);  
-            document.getElementById('bridgeroute2').innerHTML = "Number of bridges too low your route: <br /><b>" + dangercount + "</b>";
+            document.getElementById('bridgeroute2').innerHTML = "Number of bridges too low for your vehicle: <br /><b>" + dangercount + "</b>";
         }
       }
 }
@@ -207,6 +209,7 @@ if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
 }
 }
 <% end %>
+
 });
 
 
@@ -261,8 +264,6 @@ function drawBoxesBig(boxesBig) {
     }
 }
 
-
-  
 function computeTotalDistance(result) {
   var total = 0;
   var myroute = result.routes[0];
@@ -284,9 +285,10 @@ function computeTotalDistance(result) {
       <br />
       <label for="start">Start point:</label><input type="text" id="start" value="Newbrook road, Mullingar"> <br>
       <label for="stop">Stop point:</label><input type="text" id="stop" value="Ashe Road, Mullingar"> <br>
-      <label for="dest">Destination:</label><input type="text" id="dest" value="Athboy">  <br>
+      <label for="dest">Destination:</label><input type="text" id="dest" value="Mallow">  <br>
       <label for="">Vehicle Height(m):</label><input type="text" id="vehicle" value="4">  <br>
-      <label for="">Accuracy:(km)</label><input type="text" id="accuracy" value="1">  <br>
+      <label for="">Accuracy:(km)</label><input type="text" id="accuracy" value=".1">  <br>
+      <label for="">Clearance:(m)</label><input type="text" id="clearance" value=".5">  <br>
 
 
   </b><br>
@@ -304,9 +306,9 @@ function computeTotalDistance(result) {
       <button type="submit" onclick= "calcRoute()"> Submit </button> 
       <INPUT TYPE="button" onClick="history.go(0)" VALUE="Clear Page">
 
-    <h2> Bridges along your route: </h2>
-        <div id="resultdiv" style="float:left;width:55%;height 90%"> </div>
-     <div style="margin: 10px 0px 10px 700px; background-color: white; width: 100px; border: 2px solid Grey">
+     <div style="float:center; margin: 10px 0px 10px 700px; background-color: white; width: 100px; border: 2px solid Grey">
+          <h2 style="float:center;color:black;"> Bridges along your route: </h2>
+
      <b><p id="locations"></p></b>
      </div>
  </center>

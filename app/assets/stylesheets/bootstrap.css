@@ -149,9 +149,9 @@ li a:hover {
 }
 
 #directionsPanel {
-  overflow: hidden;
+  //overflow: hidden;
   width: 678px;
-  height:880px;
+  height:1080px;
   margin: 7px;
   padding: 5px;
 }

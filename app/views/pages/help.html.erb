@@ -201,7 +201,7 @@ if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
           dangercount ++;
           var infowindow = new google.maps.InfoWindow({content: contentString});
           infowindow.open(map, marker1);  
-            document.getElementById('bridgeroute2').innerHTML = "Number of bridges too low your route: " + dangercount;
+            document.getElementById('bridgeroute2').innerHTML = "Number of bridges too low for your vehicle: " + dangercount;
         }
       }  
     }
@@ -252,7 +252,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     </div>
   </form>
         <button type="submit" onclick= "calcRoute()"> Submit </button> <br> <br>
-    <div id="directionsPanel" style="float:right;width:44%;height 100%"> </div>
+    <div id="directionsPanel" style="float:right;width:44%"> </div>
  </center>
 
   <div  style="float:left;width:45%; height:50%; margin:2%">
