@@ -80,6 +80,15 @@ function calcRoute() {
     if (status == google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
     }
+    else {
+      alert("Invalid route, please try again");
+    }
+      //routeboxer
+  var path = response.routes[0].overview_path;
+  if(overview_path = null) {
+        alert("Invalid route, please try again");
+}
+    
       //routeboxer
        var path = response.routes[0].overview_path;
        var boxes = routeBoxer.box(path, distance);
@@ -187,19 +196,19 @@ if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
   else {  
   loc.appendChild(document.createTextNode(height + " meters "));
     count ++;
-      document.getElementById('bridgeroute').innerHTML = "Number of bridges on your route: <br /><b>" + count + "</b>";
+      document.getElementById('bridgeroute').innerHTML = "Number of bridges along your route: <br /><b>" + count + "</b>";
       if(height == 0) {
         narrowCount++;
          var infowindowN = new google.maps.InfoWindow({content: narrowString});
           infowindowN.open(map, marker1);  
-      document.getElementById('narrowbridge').innerHTML = "Number of narrow bridges on your route: <br /><b>" + narrowCount + "</b>";
+      document.getElementById('narrowbridge').innerHTML = "Number of narrow bridges along your route: <br /><b>" + narrowCount + "</b>";
       }
       if(height > 0){
         if (overall > height) {
           dangercount ++;
           var infowindow = new google.maps.InfoWindow({content: contentString});
           infowindow.open(map, marker1);  
-            document.getElementById('bridgeroute2').innerHTML = "Number of bridges too low for your vehicle: <br /><b>" + dangercount + "</b>";
+            document.getElementById('bridgeroute2').innerHTML = "Number of low bridges along your route: <br /><b>" + dangercount + "</b>";
         }
       }
 }

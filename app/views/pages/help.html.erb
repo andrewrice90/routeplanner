@@ -28,7 +28,7 @@ function initialize() {
   var mapOptions = {
     zoom: 7,
     center: middleMap,
-    scrollwheel: false
+    //scrollwheel: false
   };
 
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -188,12 +188,12 @@ var withinBox = new google.maps.Polygon({
 
 if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
     count ++;
-      document.getElementById('bridgeroute').innerHTML = "Number of bridges on your route: " + count;
+      document.getElementById('bridgeroute').innerHTML = "Number of bridges along your route: " + count;
       if(height == 0) {
          narrowCount++;
          var infowindowN = new google.maps.InfoWindow({content: narrowString});
           infowindowN.open(map, marker1);  
-      document.getElementById('narrowbridge').innerHTML = "Number of narrow bridges on your route: " + narrowCount;
+      document.getElementById('narrowbridge').innerHTML = "Number of narrow bridges along your route: " + narrowCount;
       }
       
       if(height > 0){
@@ -201,7 +201,7 @@ if(google.maps.geometry.poly.containsLocation(bridge1, withinBox)){
           dangercount ++;
           var infowindow = new google.maps.InfoWindow({content: contentString});
           infowindow.open(map, marker1);  
-            document.getElementById('bridgeroute2').innerHTML = "Number of bridges too low for your vehicle: " + dangercount;
+            document.getElementById('bridgeroute2').innerHTML = "Number of low bridges along your route: " + dangercount;
         }
       }  
     }
@@ -233,9 +233,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
   <form id= "routeform"> <b>
       <div id="map-canvas" style="float:left" padding="10px"> <br ></div>
       <br />
-      <label for="start">Start point:</label><input type="text" id="start" value="Newbrook road, Mullingar"> <br>
+      <label for="start">Start point:</label><input type="text" id="start" value="Ballina, Mayo"> <br>
       <label for="stop">Stop point:</label><input type="text" id="stop" value="Ashe Road, Mullingar"> <br>
-      <label for="dest">Destination:</label><input type="text" id="dest" value="Athboy">  <br>
+      <label for="dest">Destination:</label><input type="text" id="dest" value="Enniscorthy">  <br>
       
 
   </b><br>
