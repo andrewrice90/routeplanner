@@ -57,5 +57,4 @@ Administrator requirements
 
 Conclusion
 Before any code was written, a lot of consideration had to be made, and research carried out to ensure the idea for Route Planner Pro would be a successfully operational application. Originally, I did not envisage the need for a routing application like Route Planner Pro to exist, as I have no experience driving large vehicles. The more research I carried out, the more motivated I was to provide an effective solution to this international problem. Once I started my research, the information kept coming and helped to strengthen my original proposal. 
-
- There is a daily risk that faces more than 50,000 drivers of haulage companies across Ireland which can be eliminated through the use of Route Planner Pro. 
+There is a daily risk that faces more than 50,000 drivers of haulage companies across Ireland which can be eliminated through the use of Route Planner Pro. This project is also very dynamic is that it can be used on an international scale. The only requirements would be to add the locations of the bridges to the database.
