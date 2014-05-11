@@ -1,5 +1,3 @@
-Rails is a web-application framework that includes everything needed to create
-database-backed web applications according to the Model-View-Control pattern.
 
 Route Planner Pro is a web application that aids routing, mainly for Heavy Goods Vehicles (HGV). 
 Using the Google Maps Api, the application creates a route that takes the height of a vehicle into account
@@ -27,6 +25,8 @@ Development environment: Rails
 Text Editor: Sublime Text 3
 
 Ruby on Rails
+Rails is a web-application framework that includes everything needed to create
+database-backed web applications according to the Model-View-Control pattern.
 In my original proposal I decided to use only JavaScript, but as time went on I released that I needed to spend more time on the key features of the project rather than the minor components such as a log in for users/admin. First released in 1995, the Ruby programing language was designed by computer scientist Yukihiro “Matz” Matsumoto. He created it taking the best aspects from five other languages: Smalltalk, Perl, Eiffel, Ada & Lisp.  Ruby is a flexible language. I chose Ruby on Rails because the user friendly layout of the MVC that is auto-generated in creating a new project. I wanted to leave more time to work on the major functionality of my project which involves JavaScript and the Google Maps API. Ruby on Rails allowed me to quickly create a project, add tables and functionality that would have eaten into the time I spent with JavaScript. Rails also auto-generates JavaScript files for users. Ruby on Rails offers gems that are like importable libraries in Java. These powerful imports provide features such as paginate which allows the user to set a number of objects per page. This is very help for projects such as online stores. 
 JavaScript
 JavaScript was first introduced in 1995, the same year as Ruby. It is a dynamic programming language. I decided to JavaScript because the Google Maps API is written in JavaScript. Google Maps over the most extensive mapping services and for developers to access their API no longer requires an API key that it did for version 2. Version 3 is also very powerful.
@@ -37,3 +37,25 @@ There are many templates available online and I started with one of them. After 
 
 Sublime Text 3
 I started using Notepad++ as my text editor. It proved an reliable program. A colleague informed me of Sublime Text 3, a similar but more powerful text editor. Sublime offers everything Notepad++ does and much more. It can identify tags such as divs and list items and proved opening and closing ones quickly, saving me time. The colour scheme was also significantly better than that of Notepad++ which had a simple white background. Sublime features a dark grey background and recognises different elements which it colour codes, such as text is yellow. This is shown in the image below.
+
+
+Requirements Analysis
+
+User Requirements
+  •	Log in/Log out
+  •	Create/View/Edit account
+  •	Create vehicle
+  •	Select vehicle for route
+  •	Create route
+  •	View bridge locations
+Administrator requirements
+  •	Log in/Log out
+  •	View/Create/Edit/Delete account
+  •	View/Edit/Delete user
+  •	View/Create/Edit/Delete bridge locations
+  •	Create test route
+
+Conclusion
+Before any code was written, a lot of consideration had to be made, and research carried out to ensure the idea for Route Planner Pro would be a successfully operational application. Originally, I did not envisage the need for a routing application like Route Planner Pro to exist, as I have no experience driving large vehicles. The more research I carried out, the more motivated I was to provide an effective solution to this international problem. Once I started my research, the information kept coming and helped to strengthen my original proposal. 
+
+ There is a daily risk that faces more than 50,000 drivers of haulage companies across Ireland which can be eliminated through the use of Route Planner Pro. 
