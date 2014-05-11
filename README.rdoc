@@ -19,3 +19,21 @@ This is not just a problem in Ireland, in the UK in 2012, there were 1,541 under
 totalling in 1,621. The total number of bridges collisions on a world scale could be in the tens or
 even hundreds of thousands per year.
 
+Technologies Used
+
+Programming languages used: Ruby and JavaScript
+Layout and styling: HTML and CSS
+Development environment: Rails
+Text Editor: Sublime Text 3
+
+Ruby on Rails
+In my original proposal I decided to use only JavaScript, but as time went on I released that I needed to spend more time on the key features of the project rather than the minor components such as a log in for users/admin. First released in 1995, the Ruby programing language was designed by computer scientist Yukihiro “Matz” Matsumoto. He created it taking the best aspects from five other languages: Smalltalk, Perl, Eiffel, Ada & Lisp.  Ruby is a flexible language. I chose Ruby on Rails because the user friendly layout of the MVC that is auto-generated in creating a new project. I wanted to leave more time to work on the major functionality of my project which involves JavaScript and the Google Maps API. Ruby on Rails allowed me to quickly create a project, add tables and functionality that would have eaten into the time I spent with JavaScript. Rails also auto-generates JavaScript files for users. Ruby on Rails offers gems that are like importable libraries in Java. These powerful imports provide features such as paginate which allows the user to set a number of objects per page. This is very help for projects such as online stores. 
+JavaScript
+JavaScript was first introduced in 1995, the same year as Ruby. It is a dynamic programming language. I decided to JavaScript because the Google Maps API is written in JavaScript. Google Maps over the most extensive mapping services and for developers to access their API no longer requires an API key that it did for version 2. Version 3 is also very powerful.
+The Google Maps API is widely used and finding helpful content online was not too difficult. Goole also have an API search engine to help developers at developers.google.com/maps
+
+HTML & CSS
+There are many templates available online and I started with one of them. After a few weeks, I decided to write my own CSS as a template can take more time to go through to connect the right tags in the HTML code. This decision has helped me greatly improve my CSS skills throughout the making of this project.
+
+Sublime Text 3
+I started using Notepad++ as my text editor. It proved an reliable program. A colleague informed me of Sublime Text 3, a similar but more powerful text editor. Sublime offers everything Notepad++ does and much more. It can identify tags such as divs and list items and proved opening and closing ones quickly, saving me time. The colour scheme was also significantly better than that of Notepad++ which had a simple white background. Sublime features a dark grey background and recognises different elements which it colour codes, such as text is yellow. This is shown in the image below.
